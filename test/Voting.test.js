@@ -19,6 +19,7 @@ contract("Voting", () => {
     it("Successfully creates a poll", async () => {
       const log = result.logs[0];
       assert.equal(log.event, "PollEvent");
+      console.log(log);
       // const event = log.args;
       // assert.equal(event.token, token.address, "token address is correct");
       // assert.equal(event.user, user1, "user address is correct");

@@ -38,9 +38,10 @@ export const loadVoting = async (web3, networkId, dispatch) => {
   }
 };
 
-export const subscribeToEvents = async (voting, dispatch, votingLoaded) => {
+export const subscribeToEvents = async (voting, dispatch) => {
   voting.events.PollEvent({}, (error, event) => {
     dispatch(pollCreated(event.returnValues));
+    console.log("hi");
   });
 };
 

@@ -34,21 +34,22 @@ function createPoll(state = {}, action) {
     case "POLL_CREATING":
       return { ...state, pollCreated: false };
     case "POLL_CREATED":
-      data = {
-        poll: action.pollData.poll,
-        canidateOne: action.pollData.choice1,
-        canidateTwo: action.pollData.choice2,
-      };
+      if (state.pollCreatedData) {
+        data = [...state.pollCreatedData.data, action.pollData];
+        console.log("top", data.length);
+      } else {
+        data = [action.pollData];
+        console.log("bot", data.length);
+      }
+
       return {
         ...state,
         pollCreated: true,
 
-        pollCreatedData: [
-          {
-            ...state.pollCreatedData.data,
-            data,
-          },
-        ],
+        pollCreatedData: {
+          ...state.pollCreatedData,
+          data,
+        },
       };
 
     default:

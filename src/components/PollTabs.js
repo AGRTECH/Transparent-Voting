@@ -2,7 +2,12 @@ import React, { Component } from "react";
 import { Tabs, Tab } from "react-bootstrap";
 import CreatePoll from "./CreatePoll";
 import ActivePolls from "./ActivePolls";
-import { subscribeToEvents, loadVoting, loadWeb3 } from "../store/interactions";
+import {
+  subscribeToEvents,
+  loadAllData,
+  loadVoting,
+  loadWeb3,
+} from "../store/interactions";
 import { votingSelector, votingLoadedSelector } from "../store/selectors";
 import { connect } from "react-redux";
 
@@ -12,7 +17,7 @@ class PollTabs extends Component {
   }
 
   async loadBlockchainData(props) {
-    const { dispatch, votingLoaded } = props;
+    const { dispatch } = props;
     const web3 = loadWeb3(dispatch);
     await web3.eth.net.getNetworkType();
     const networkId = await web3.eth.net.getId();
@@ -22,6 +27,7 @@ class PollTabs extends Component {
         "Token smart contract not detcted on the current network. Please select another network with Metamask"
       );
     } else {
+      await loadAllData(voting, dispatch);
       await subscribeToEvents(voting, dispatch);
     }
   }

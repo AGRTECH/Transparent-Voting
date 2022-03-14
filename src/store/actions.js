@@ -51,8 +51,36 @@ export function pollCreated(pollData) {
   };
 }
 
-export function voteCasted() {
+export function voteCasted(voteData) {
   return {
     type: "VOTE_CASTED",
+    voteData,
+  };
+}
+
+export function voteCasting() {
+  return {
+    type: "VOTE_CASTING",
+  };
+}
+
+export function allPollsLoaded(allPolls) {
+  return {
+    type: "ALL_POLLS_LOADED",
+    allPolls,
+  };
+}
+
+export function allVotesLoaded(allVotes) {
+  return {
+    type: "ALL_VOTES_LOADED",
+    allVotes,
+  };
+}
+
+export function counter(time) {
+  return {
+    type: "COUNTING",
+    time,
   };
 }

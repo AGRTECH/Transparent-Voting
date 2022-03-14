@@ -22,5 +22,13 @@ export const canidateOneSelector = createSelector(canidateOne, (e) => e);
 const canidateTwo = (state) => get(state, "createPoll.canidateTwo");
 export const canidateTwoSelector = createSelector(canidateTwo, (e) => e);
 
-const pollCreated = (state) => get(state, "createPoll.pollCreated", false);
+const pollCreated = (state) =>
+  get(state, "createPoll.pollCreatedData.loaded", false);
 export const pollCreatedSelector = createSelector(pollCreated, (e) => e);
+
+const allPolls = (state) => get(state, "createPoll.pollCreatedData", []);
+export const allPollsSelector = createSelector(allPolls, (e) => e);
+
+const allPollsLoaded = (state) =>
+  get(state, "createPoll.pollCreatedData.loaded", false);
+export const allPollsLoadedSelector = createSelector(allPollsLoaded, (e) => e);

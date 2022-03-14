@@ -11,6 +11,8 @@ contract Voting {
    string public choice2;
    string public poll;
    uint256 public pollCount;
+   uint256 public voteCount;
+   uint256 public voteId;
    mapping(string => uint) public votes;
    mapping(uint256 => _Poll) public polls;
    // To Do List
@@ -24,6 +26,15 @@ contract Voting {
       string poll,
       string choice1,
       string choice2,
+      uint256 timestamp
+   );
+
+   event VoteEvent(
+      uint256 id,
+      address user,
+      string poll,
+      string choice,
+      uint voteCount,
       uint256 timestamp
    );
 
@@ -45,8 +56,10 @@ contract Voting {
       emit PollEvent(pollCount, msg.sender, _poll, _choice1, _choice2, now); 
    }
 
-   function vote(string memory _choice) public {
-      require(block.timestamp < timePeriod);
+   function vote(string memory _choice, string memory _poll) public {
+      // require(block.timestamp < timePeriod);
+      voteId = voteId.add(1);
       votes[_choice] += 1;
+      emit VoteEvent(voteId, msg.sender, _poll, _choice, votes[_choice], now);
    }
 }

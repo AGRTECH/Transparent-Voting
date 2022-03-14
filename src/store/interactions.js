@@ -6,6 +6,9 @@ import {
   web3AccountLoaded,
   pollCreating,
   voteCasted,
+  allPollsLoaded,
+  voteCasting,
+  allVotesLoaded,
 } from "./actions";
 import Web3 from "web3";
 
@@ -38,10 +41,35 @@ export const loadVoting = async (web3, networkId, dispatch) => {
   }
 };
 
+export const loadAllData = async (voting, dispatch) => {
+  // Fetch polls with the 'Poll' event stream
+  const pollStream = await voting.getPastEvents("PollEvent", {
+    fromBlock: 0,
+    toBlock: "latest",
+  });
+  // Format polls
+  const allPolls = pollStream.map((event) => event.returnValues);
+  // Add polls to the redux store
+  dispatch(allPollsLoaded(allPolls));
+
+  // Fetch votes with the 'vote' event stream
+  const voteStream = await voting.getPastEvents("VoteEvent", {
+    fromBlock: 0,
+    toBlock: "latest",
+  });
+  // Format votes
+  const allVotes = voteStream.map((event) => event.returnValues);
+  // Add votes to the redux store
+  dispatch(allVotesLoaded(allVotes));
+};
+
 export const subscribeToEvents = async (voting, dispatch) => {
   voting.events.PollEvent({}, (error, event) => {
     dispatch(pollCreated(event.returnValues));
-    console.log("hi");
+  });
+
+  voting.events.VoteEvent({}, (error, event) => {
+    dispatch(voteCasted(event.returnValues));
   });
 };
 
@@ -65,12 +93,12 @@ export const createPollFunc = (
     });
 };
 
-export const voteFunc = (dispatch, voting, account, choice) => {
+export const voteFunc = (dispatch, voting, account, choice, poll) => {
   voting.methods
-    .vote(choice)
+    .vote(choice, poll)
     .send({ from: account })
     .on("transactionHash", (hash) => {
-      dispatch(voteCasted());
+      dispatch(voteCasting());
     })
     .on("error", (error) => {
       console.error(error);

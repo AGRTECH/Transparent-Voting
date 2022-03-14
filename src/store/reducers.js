@@ -31,8 +31,20 @@ function createPoll(state = {}, action) {
       return { ...state, canidateOne: action.data };
     case "CANIDATE_TWO_CHANGED":
       return { ...state, canidateTwo: action.data };
+    case "ALL_POLLS_LOADED":
+      return {
+        ...state,
+        pollCreatedData: { loaded: true, data: action.allPolls },
+      };
+    case "ALL_VOTES_LOADED":
+      return {
+        ...state,
+        voteData: { loaded: true, data: action.allPolls },
+      };
     case "POLL_CREATING":
       return { ...state, pollCreated: false };
+    case "VOTE_CASTING":
+      return { ...state, voteCasted: false };
     case "POLL_CREATED":
       if (state.pollCreatedData) {
         data = [...state.pollCreatedData.data, action.pollData];
@@ -51,6 +63,26 @@ function createPoll(state = {}, action) {
           data,
         },
       };
+    case "VOTE_CASTED":
+      if (state.voteData.data) {
+        data = [...state.voteData.data, action.voteData];
+        console.log("top", data.length);
+      } else {
+        data = [action.voteData];
+        console.log("bot", data.length);
+      }
+
+      return {
+        ...state,
+        voteCasted: true,
+
+        voteData: {
+          ...state.voteData,
+          data,
+        },
+      };
+    case "COUNTING":
+      return { ...state, time: action.time };
 
     default:
       return state;

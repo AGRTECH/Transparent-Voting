@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import "./App.css";
 import Navbar from "./Navbar";
 import PollTabs from "./PollTabs";
-import { loadVoting, loadAccount, loadWeb3 } from "../store/interactions";
+import { loadAccount, loadWeb3 } from "../store/interactions";
 
 class App extends Component {
   UNSAFE_componentWillMount() {

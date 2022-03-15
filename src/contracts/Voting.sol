@@ -15,10 +15,11 @@ contract Voting {
    uint256 public voteId;
    mapping(string => uint) public votes;
    mapping(uint256 => _Poll) public polls;
+   mapping(address => bool) public hasVoted;
    // To Do List
    // [x] Users can create a new poll with 2 choices 
    // [x] User can vote on one of the choices 
-   // [x] Set a voting time period
+   // [x] Set a voting time period (mostly in JS but using blockchain timestamp)
    // [x] At the end of the period, the one with more votes wins
    event PollEvent(
       uint256 id,
@@ -57,7 +58,7 @@ contract Voting {
    }
 
    function vote(string memory _choice, string memory _poll) public {
-      // require(block.timestamp < timePeriod);
+      hasVoted[msg.sender] = true;
       voteId = voteId.add(1);
       votes[_choice] += 1;
       emit VoteEvent(voteId, msg.sender, _poll, _choice, votes[_choice], now);

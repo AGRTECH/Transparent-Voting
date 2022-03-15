@@ -15,31 +15,12 @@ import {
 import { voteFunc } from "../store/interactions";
 import moment from "moment";
 import Countdown from "./Countdown";
-import { counter } from "../store/actions";
 
-// const countdown = () => {
-//   const countDate = new Date("April 15, 2022 00:00:00").getTime();
-//   const now = new Date().getTime();
-//   const gap = countDate - now;
-
-//   const second = 1000;
-//   const minute = second * 60;
-//   const hour = minute * 60;
-//   const day = hour * 24;
-
-//   const textDay = Math.floor(gap / day);
-//   const textHour = Math.floor((gap % day) / hour);
-//   const textMinute = Math.floor((gap % hour) / minute);
-//   const textSecond = Math.floor((gap % minute) / second);
-
-//   return textSecond;
-// };
-
-const ActivePolls = (props) => {
+const Results = (props) => {
   const renderPoll = (poll, props) => {
     const { dispatch, voting, account } = props;
     const gap = 1647292470;
-    console.log(poll.timestamp);
+
     let formattedCanOne = poll.choice1
       .split("")
       .filter((a, b) => b !== 0)
@@ -57,9 +38,7 @@ const ActivePolls = (props) => {
       .filter((a, b) => b !== 0)
       .map((c, d) => c.toLowerCase())
       .join("");
-
-    dispatch(counter(poll.timestamp - gap));
-    if (poll.timestamp - gap > 0) {
+    if (poll.timestamp - gap <= 0) {
       return (
         <tr key={poll.id} className="">
           <td>{poll.id}</td>
@@ -85,9 +64,7 @@ const ActivePolls = (props) => {
               vote
             </button>
           </td>
-          <td>
-            <Countdown time={poll.timestamp - gap} />
-          </td>
+          <td>winner</td>
         </tr>
       );
     }
@@ -102,7 +79,7 @@ const ActivePolls = (props) => {
           <th>Poll Category</th>
           <th>Canidate One</th>
           <th>Canidate Two</th>
-          <th>Time Remaining</th>
+          <th>Winner</th>
         </tr>
         {allPollsLoaded && allPolls.data.length > 0 ? (
           allPolls.data.map((poll) => renderPoll(poll, props))
@@ -144,4 +121,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(ActivePolls);
+export default connect(mapStateToProps)(Results);

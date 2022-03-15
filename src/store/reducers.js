@@ -82,8 +82,10 @@ function createPoll(state = {}, action) {
         },
       };
     case "COUNTING":
-      return { ...state, time: action.time };
-
+      return {
+        ...state,
+        time: action.time,
+      };
     default:
       return state;
   }

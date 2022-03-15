@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Tabs, Tab } from "react-bootstrap";
 import CreatePoll from "./CreatePoll";
 import ActivePolls from "./ActivePolls";
+import Results from "./Results";
 import {
   subscribeToEvents,
   loadAllData,
@@ -35,12 +36,15 @@ class PollTabs extends Component {
   render() {
     return (
       <>
-        <Tabs defaultActiveKey="create" className="mb-3">
+        <Tabs defaultActiveKey="polls" className="mb-3">
           <Tab eventKey="create" title="Create Poll">
             <CreatePoll />
           </Tab>
           <Tab eventKey="polls" title="Active Polls">
             <ActivePolls />
+          </Tab>
+          <Tab eventKey="results" title="Poll Results">
+            <Results />
           </Tab>
         </Tabs>
       </>

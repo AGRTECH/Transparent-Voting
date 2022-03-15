@@ -2,7 +2,7 @@ require("chai").use(require("chai-as-promised")).should();
 
 const Voting = artifacts.require("./Voting");
 
-contract("Voting", () => {
+contract("Voting", ([deployer, user1, user2, user3]) => {
   let voting;
 
   beforeEach(async () => {
@@ -43,5 +43,8 @@ contract("Voting", () => {
       assert.equal(pollTwo.poll, "cats");
       assert.equal(pollThree.id.toString(), "3");
     });
+  });
+  describe("Checks if the user has already voted", async () => {
+    beforeEach(async () => {});
   });
 });

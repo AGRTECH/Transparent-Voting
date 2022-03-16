@@ -21,8 +21,11 @@ Tech stack:
 + & more libraries
 
 This dApp consists of three tabs. 
+
 -create poll tab
+
 -active polls tab
+
 -results tab
 
 Create Poll Tab:

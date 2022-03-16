@@ -1,14 +1,14 @@
 Voting and Poll Creation dApp 
 
 Tech stack:
-HTML :
-CSS :
-Javascript :
-React :
-Redux : 
-Solidity :
-Web3.js : 
-Truffle / Ganache :
+HTML 
+CSS 
+Javascript 
+React 
+Redux
+Solidity 
+Web3.js  
+Truffle / Ganache 
 & more libraries
 
 This dApp consists of three tabs. 

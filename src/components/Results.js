@@ -17,16 +17,22 @@ import {
 } from "../store/selectors";
 
 const Results = (props) => {
-  const renderPoll = (poll, props) => {
+  const renderResult = (poll, props) => {
     const { votingLoaded, allPollsLoaded, allVotes, allVotesLoaded } = props;
-    const gap = 1647397470;
+    const gap = 1647497470;
     let votes1 = 0;
     let votes2 = 0;
     if (allVotesLoaded) {
       for (let i = 0; i < allVotes.length; i++) {
-        if (allVotes[i].choice === poll.choice1) {
+        if (
+          allVotes[i].choice === poll.choice1 &&
+          allVotes[i].pollId === poll.id
+        ) {
           votes1 = allVotes[i].voteCount;
-        } else if (allVotes[i].choice === poll.choice2) {
+        } else if (
+          allVotes[i].choice === poll.choice2 &&
+          allVotes[i].pollId === poll.id
+        ) {
           votes2 = allVotes[i].voteCount;
         }
       }
@@ -75,8 +81,9 @@ const Results = (props) => {
     }
   };
 
-  const showAllPolls = (props) => {
+  const showAllResults = (props) => {
     const { allPolls, allPollsLoaded } = props;
+
     return (
       <tbody>
         <tr>
@@ -89,10 +96,10 @@ const Results = (props) => {
           <th>Winner</th>
         </tr>
         {allPollsLoaded && allPolls.data.length > 0 ? (
-          allPolls.data.map((poll) => renderPoll(poll, props))
+          allPolls.data.map((poll) => renderResult(poll, props))
         ) : (
           <tr>
-            <td>No polls to show...</td>
+            <td>No results to show...</td>
           </tr>
         )}
       </tbody>
@@ -102,11 +109,11 @@ const Results = (props) => {
   return (
     <table className="table table-dark">
       {props.pollCreated ? (
-        showAllPolls(props)
+        showAllResults(props)
       ) : (
         <tbody>
           <tr>
-            <td>"No active polls right now..."</td>
+            <td>"No results right now..."</td>
           </tr>
         </tbody>
       )}

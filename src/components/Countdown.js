@@ -12,10 +12,11 @@ import {
   allPollsSelector,
   allPollsLoadedSelector,
 } from "../store/selectors";
+import { saveLastCount } from "../store/actions";
 
 const Countdown = (props) => {
   const [seconds, setSeconds] = useState(props.time);
-
+  props.dispatch(saveLastCount(props.timestampArr));
   useEffect(() => {
     const interval = setInterval(() => {
       setSeconds((seconds) => {
@@ -25,6 +26,7 @@ const Countdown = (props) => {
           return "Poll end";
         }
       });
+      // console.log(props.dispatch(saveLastCount()));
     }, 1000);
     return () => clearInterval(interval);
   }, []);

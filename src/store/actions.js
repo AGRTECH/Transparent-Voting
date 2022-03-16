@@ -84,3 +84,10 @@ export function counter(time) {
     time,
   };
 }
+
+export function saveLastCount(seconds) {
+  return {
+    type: "SAVE_LAST_COUNT",
+    seconds,
+  };
+}

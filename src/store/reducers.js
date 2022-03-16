@@ -5,7 +5,7 @@ function web3(state = {}, action) {
     case "WEB3_LOADED":
       return { ...state, connection: action.connection };
     case "WEB3_ACCOUNT_LOADED":
-      return { ...state, account: action.account };
+      return { ...state, accountLoaded: true, account: action.account };
     default:
       return state;
   }
@@ -85,6 +85,15 @@ function createPoll(state = {}, action) {
       return {
         ...state,
         time: action.time,
+      };
+    case "SAVE_LAST_COUNT":
+      let editedTimestamps = [];
+      for (let i = 0; i < action.seconds.length; i++) {
+        editedTimestamps.push(action.seconds[i]--);
+      }
+      return {
+        ...state,
+        time: editedTimestamps,
       };
     default:
       return state;

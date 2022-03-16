@@ -105,9 +105,3 @@ export const voteFunc = (dispatch, voting, account, choice, poll, id) => {
       window.alert(`There was an error!`);
     });
 };
-
-export const voteCount = async (dispatch, voting, choice) => {
-  let voteMappingRead;
-  voteMappingRead = await voting.methods.votes(choice).call();
-  return voteMappingRead;
-};

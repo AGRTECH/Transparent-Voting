@@ -41,7 +41,7 @@ const showForm = (props) => {
           onChange={(e) => {
             dispatch(categoryChanged(e.target.value));
           }}
-          className="bg-dark text-white"
+          className="bg-dark text-white tableitemspacing"
           required
         />
         <input
@@ -50,7 +50,7 @@ const showForm = (props) => {
           onChange={(e) => {
             dispatch(canidateOneChanged(e.target.value));
           }}
-          className="bg-dark text-white"
+          className="bg-dark text-white tableitemspacing"
           required
         />
         <input
@@ -59,10 +59,12 @@ const showForm = (props) => {
           onChange={(e) => {
             dispatch(canidateTwoChanged(e.target.value));
           }}
-          className="bg-dark text-white"
+          className="bg-dark text-white tableitemspacing"
           required
         />
-        <button type="submit">Create Poll</button>
+        <button className="btn btn-primary" type="submit">
+          Create Poll
+        </button>
       </form>
     </div>
   );

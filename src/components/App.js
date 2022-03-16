@@ -4,6 +4,7 @@ import "./App.css";
 import Navbar from "./Navbar";
 import PollTabs from "./PollTabs";
 import { loadAccount, loadWeb3 } from "../store/interactions";
+import ParticlesBg from "particles-bg";
 
 class App extends Component {
   UNSAFE_componentWillMount() {
@@ -21,6 +22,7 @@ class App extends Component {
       <div>
         <Navbar />
         <PollTabs />
+        <ParticlesBg type="cobweb" bg={true} />
       </div>
     );
   }

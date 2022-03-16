@@ -7,6 +7,9 @@ export const web3Selector = createSelector(web3, (e) => e);
 const account = (state) => get(state, "web3.account");
 export const accountSelector = createSelector(account, (e) => e);
 
+const accountLoaded = (state) => get(state, "web3.accountLoaded", false);
+export const accountLoadedSelector = createSelector(accountLoaded, (e) => e);
+
 const voting = (state) => get(state, "voting.contract");
 export const votingSelector = createSelector(voting, (e) => e);
 

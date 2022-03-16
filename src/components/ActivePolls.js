@@ -48,7 +48,14 @@ const ActivePolls = (props) => {
             <p>{poll.choice1[0].toUpperCase() + formattedCanOne}</p>
             <button
               onClick={(e) => {
-                voteFunc(dispatch, voting, account, poll.choice1, poll.poll);
+                voteFunc(
+                  dispatch,
+                  voting,
+                  account,
+                  poll.choice1,
+                  poll.poll,
+                  poll.id
+                );
                 voteCount(dispatch, voting, poll.choice1);
               }}
             >
@@ -60,7 +67,14 @@ const ActivePolls = (props) => {
             <p>{poll.choice2[0].toUpperCase() + formattedCanTwo}</p>
             <button
               onClick={(e) => {
-                voteFunc(dispatch, voting, account, poll.choice2, poll.poll);
+                voteFunc(
+                  dispatch,
+                  voting,
+                  account,
+                  poll.choice2,
+                  poll.poll,
+                  poll.id
+                );
                 voteCount(dispatch, voting, poll.choice2);
               }}
             >

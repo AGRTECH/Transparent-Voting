@@ -93,9 +93,9 @@ export const createPollFunc = (
     });
 };
 
-export const voteFunc = (dispatch, voting, account, choice, poll) => {
+export const voteFunc = (dispatch, voting, account, choice, poll, id) => {
   voting.methods
-    .vote(choice, poll)
+    .vote(choice, poll, id)
     .send({ from: account })
     .on("transactionHash", (hash) => {
       dispatch(voteCasting());

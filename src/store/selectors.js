@@ -32,3 +32,10 @@ export const allPollsSelector = createSelector(allPolls, (e) => e);
 const allPollsLoaded = (state) =>
   get(state, "createPoll.pollCreatedData.loaded", false);
 export const allPollsLoadedSelector = createSelector(allPollsLoaded, (e) => e);
+
+const allVotes = (state) => get(state, "createPoll.voteData.data", []);
+export const allVotesSelector = createSelector(allVotes, (e) => e);
+
+const allVotesLoaded = (state) =>
+  get(state, "createPoll.voteData.loaded", false);
+export const allVotesLoadedSelector = createSelector(allVotesLoaded, (e) => e);

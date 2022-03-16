@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import "./App.css";
 import {
@@ -12,34 +12,14 @@ import {
   allPollsSelector,
   allPollsLoadedSelector,
 } from "../store/selectors";
-import { voteFunc } from "../store/interactions";
-import moment from "moment";
+import { voteFunc, voteCount } from "../store/interactions";
 import Countdown from "./Countdown";
 import { counter } from "../store/actions";
-
-// const countdown = () => {
-//   const countDate = new Date("April 15, 2022 00:00:00").getTime();
-//   const now = new Date().getTime();
-//   const gap = countDate - now;
-
-//   const second = 1000;
-//   const minute = second * 60;
-//   const hour = minute * 60;
-//   const day = hour * 24;
-
-//   const textDay = Math.floor(gap / day);
-//   const textHour = Math.floor((gap % day) / hour);
-//   const textMinute = Math.floor((gap % hour) / minute);
-//   const textSecond = Math.floor((gap % minute) / second);
-
-//   return textSecond;
-// };
 
 const ActivePolls = (props) => {
   const renderPoll = (poll, props) => {
     const { dispatch, voting, account } = props;
-    const gap = 1647292470;
-    console.log(poll.timestamp);
+    const gap = 1647297470;
     let formattedCanOne = poll.choice1
       .split("")
       .filter((a, b) => b !== 0)
@@ -69,6 +49,7 @@ const ActivePolls = (props) => {
             <button
               onClick={(e) => {
                 voteFunc(dispatch, voting, account, poll.choice1, poll.poll);
+                voteCount(dispatch, voting, poll.choice1);
               }}
             >
               vote
@@ -80,6 +61,7 @@ const ActivePolls = (props) => {
             <button
               onClick={(e) => {
                 voteFunc(dispatch, voting, account, poll.choice2, poll.poll);
+                voteCount(dispatch, voting, poll.choice2);
               }}
             >
               vote

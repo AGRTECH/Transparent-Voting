@@ -12,30 +12,9 @@ import {
   allPollsSelector,
   allPollsLoadedSelector,
 } from "../store/selectors";
-import { counter } from "../store/actions";
-
-// const countdown = () => {
-//   const countDate = new Date("April 15, 2022 00:00:00").getTime();
-//   const now = new Date().getTime();
-//   const gap = countDate - now;
-
-//   const second = 1000;
-//   const minute = second * 60;
-//   const hour = minute * 60;
-//   const day = hour * 24;
-
-//   const textDay = Math.floor(gap / day);
-//   const textHour = Math.floor((gap % day) / hour);
-//   const textMinute = Math.floor((gap % hour) / minute);
-//   const textSecond = Math.floor((gap % minute) / second);
-
-//   return textSecond;
-// };
 
 const Countdown = (props) => {
-  const timeLeft = Math.floor(new Date("2012.08.10").getTime() / 1000);
   const [seconds, setSeconds] = useState(props.time);
-  const { dispatch } = props;
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -46,7 +25,6 @@ const Countdown = (props) => {
           return "Poll end";
         }
       });
-      // dispatch(counter(seconds));
     }, 1000);
     return () => clearInterval(interval);
   }, []);

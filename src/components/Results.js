@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import "./App.css";
 import {
@@ -11,15 +11,26 @@ import {
   pollCreatedSelector,
   allPollsSelector,
   allPollsLoadedSelector,
+  votingLoadedSelector,
+  allVotesSelector,
+  allVotesLoadedSelector,
 } from "../store/selectors";
-import { voteFunc } from "../store/interactions";
-import moment from "moment";
-import Countdown from "./Countdown";
 
 const Results = (props) => {
   const renderPoll = (poll, props) => {
-    const { dispatch, voting, account } = props;
-    const gap = 1647292470;
+    const { votingLoaded, allPollsLoaded, allVotes, allVotesLoaded } = props;
+    const gap = 1647397470;
+    let votes1 = 0;
+    let votes2 = 0;
+    if (allVotesLoaded) {
+      for (let i = 0; i < allVotes.length; i++) {
+        if (allVotes[i].choice === poll.choice1) {
+          votes1 = allVotes[i].voteCount;
+        } else if (allVotes[i].choice === poll.choice2) {
+          votes2 = allVotes[i].voteCount;
+        }
+      }
+    }
 
     let formattedCanOne = poll.choice1
       .split("")
@@ -45,26 +56,20 @@ const Results = (props) => {
           <td>{poll.poll[0].toUpperCase() + formattedCat}</td>
           <td>
             <p>{poll.choice1[0].toUpperCase() + formattedCanOne}</p>
-            <button
-              onClick={(e) => {
-                voteFunc(dispatch, voting, account, poll.choice1, poll.poll);
-              }}
-            >
-              vote
-            </button>
           </td>
 
           <td>
             <p>{poll.choice2[0].toUpperCase() + formattedCanTwo}</p>
-            <button
-              onClick={(e) => {
-                voteFunc(dispatch, voting, account, poll.choice2, poll.poll);
-              }}
-            >
-              vote
-            </button>
           </td>
-          <td>winner</td>
+          <td>{votes1}</td>
+          <td>{votes2}</td>
+          <td className="text-success">
+            {votingLoaded && allPollsLoaded && allVotesLoaded && votes1 > votes2
+              ? poll.choice1[0].toUpperCase() + formattedCanOne
+              : votes2 > votes1
+              ? poll.choice2[0].toUpperCase() + formattedCanTwo
+              : "It's a tie!"}
+          </td>
         </tr>
       );
     }
@@ -79,6 +84,8 @@ const Results = (props) => {
           <th>Poll Category</th>
           <th>Canidate One</th>
           <th>Canidate Two</th>
+          <th>Final Votes (Canidate One)</th>
+          <th>Final Votes (Canidate Two)</th>
           <th>Winner</th>
         </tr>
         {allPollsLoaded && allPolls.data.length > 0 ? (
@@ -110,6 +117,9 @@ const Results = (props) => {
 function mapStateToProps(state) {
   return {
     voting: votingSelector(state),
+    votingLoaded: votingLoadedSelector(state),
+    allVotes: allVotesSelector(state),
+    allVotesLoaded: allVotesLoadedSelector(state),
     web3: web3Selector(state),
     category: categorySelector(state),
     canidateOne: canidateOneSelector(state),

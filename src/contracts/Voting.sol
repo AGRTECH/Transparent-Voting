@@ -14,8 +14,9 @@ contract Voting {
    uint256 public voteCount;
    uint256 public voteId;
    mapping(string => uint) public votes;
+   mapping(string => mapping(string => uint)) public votesPerPoll;
    mapping(uint256 => _Poll) public polls;
-   mapping(address => bool) public hasVoted;
+   mapping(string => address) public hasVotedOnPoll;
    // To Do List
    // [x] Users can create a new poll with 2 choices 
    // [x] User can vote on one of the choices 
@@ -58,7 +59,8 @@ contract Voting {
    }
 
    function vote(string memory _choice, string memory _poll) public {
-      hasVoted[msg.sender] = true;
+      require(hasVotedOnPoll[_poll] != msg.sender);
+      hasVotedOnPoll[_poll] = msg.sender;
       voteId = voteId.add(1);
       votes[_choice] += 1;
       emit VoteEvent(voteId, msg.sender, _poll, _choice, votes[_choice], now);

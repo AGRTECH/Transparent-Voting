@@ -39,7 +39,7 @@ function createPoll(state = {}, action) {
     case "ALL_VOTES_LOADED":
       return {
         ...state,
-        voteData: { loaded: true, data: action.allPolls },
+        voteData: { loaded: true, data: action.allVotes },
       };
     case "POLL_CREATING":
       return { ...state, pollCreated: false };

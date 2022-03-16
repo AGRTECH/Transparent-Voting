@@ -18,7 +18,7 @@ Tech stack:
 
 + Truffle / Ganache 
 
-& more libraries
++ & more libraries
 
 This dApp consists of three tabs. 
 -create poll tab

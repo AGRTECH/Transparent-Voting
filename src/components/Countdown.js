@@ -15,6 +15,7 @@ import {
 import { saveLastCount } from "../store/actions";
 
 const Countdown = (props) => {
+  // set default state back to props.time
   const [seconds, setSeconds] = useState(props.time);
   props.dispatch(saveLastCount(props.timestampArr));
   useEffect(() => {

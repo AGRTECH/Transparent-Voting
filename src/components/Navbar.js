@@ -10,7 +10,13 @@ class Navbar extends Component {
         <h1 className="navbar-brand">Transparent Voting</h1>
         {this.props.accountLoaded ? (
           <p className="text-muted">
-            <b>Account:</b> {this.props.account}
+            {`Account: ${this.props.account
+              .split("")
+              .splice(0, 5, "")
+              .join("")}...${this.props.account
+              .split("")
+              .splice(38, 4, "")
+              .join("")}`}
           </p>
         ) : (
           <p>Please Connect Your Wallet</p>

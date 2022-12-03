@@ -19,7 +19,7 @@ import {
 const Results = (props) => {
   const renderResult = (poll, props) => {
     const { votingLoaded, allPollsLoaded, allVotes, allVotesLoaded } = props;
-    const gap = 1647497470;
+    const gap = 1649897470;
     let votes1 = 0;
     let votes2 = 0;
     if (allVotesLoaded) {

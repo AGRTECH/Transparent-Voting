@@ -15,7 +15,8 @@ module.exports = {
       provider: function () {
         return new HDWalletProvider(
           privateKeys.split(","), // Array of account private keys from .env
-          `https://kovan.infura.io/v3/${process.env.INFURA_API_KEY}`
+          // `https://kovan.infura.io/v3/${process.env.INFURA_API_KEY}`
+          "https://goerli.infura.io/v3/ccadf1018f5a4a68a34aed625b8c1869"
         );
       },
       gas: 5000000,

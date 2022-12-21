@@ -2,14 +2,16 @@
 pragma solidity ^0.5.0;
 
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
+import "openzeppelin-solidity/contracts/utils/ReentrancyGuard.sol";
 
 // To Do List
    // [x] Users can create a new poll with 2 choices 
    // [x] User can vote on one of the choices 
    // [x] Set a voting time period (JS)
    // [x] At the end of the period, the one with more votes wins (JS)
+   // [] If the user guesses the right canidate, they win tokens
 
-contract Voting {
+contract Voting is ReentrancyGuard {
    using SafeMath for uint;
 
    // Variables and Mappings
@@ -49,9 +51,14 @@ contract Voting {
    );
    
 
-
-   // Creates a poll with user inputed category type and two choices, poll gets stored in the event stream
-   function createPoll(string memory _poll, string memory _choice1, string memory _choice2) public {
+    /** 
+  * @notice Creates a poll with user inputed category type and two choices
+  * @param _poll The name of the poll
+  * @param _choice1 The name of the first canidate
+  * @param _choice2 The name of the second canidate
+  */
+  
+   function createPoll(string memory _poll, string memory _choice1, string memory _choice2) public nonReentrant {
 
       // pollCount is used as a unique ID for each poll and when this function is called it creates a new ID
       pollCount = pollCount.add(1);
@@ -63,8 +70,15 @@ contract Voting {
       emit PollEvent(pollCount, msg.sender, _poll, _choice1, _choice2, now); 
    }
 
-   // User casts a vote by clicking a button on the UI and the vote gets stored in the event stream
-   function vote(string memory _choice, string memory _poll, uint256 _id) public {
+     /** 
+  * @notice Casts a vote on a created poll
+  * @dev Throws if the address has already voted on a speific catergory
+  * @param _choice The canidate chosen to vote on
+  * @param _poll The poll being voted on
+  * @param _id The poll id to create guarenteed individuallity between polls
+  */
+
+   function vote(string memory _choice, string memory _poll, uint256 _id) public nonReentrant {
 
       // requires that the user has not already voted once on a particular poll
       require(hasVotedOnPoll[_id][msg.sender] != true);

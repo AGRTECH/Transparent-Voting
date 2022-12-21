@@ -47,7 +47,7 @@ const ActivePolls = (props) => {
           <td>
             <p>{poll.choice1[0].toUpperCase() + formattedCanOne}</p>
             <button
-              className="btn btn-primary"
+              className="btn btn-primary active-poll-btn"
               onClick={(e) => {
                 voteFunc(
                   dispatch,
@@ -66,7 +66,7 @@ const ActivePolls = (props) => {
           <td>
             <p>{poll.choice2[0].toUpperCase() + formattedCanTwo}</p>
             <button
-              className="btn btn-primary"
+              className="btn btn-primary active-poll-btn"
               onClick={(e) => {
                 voteFunc(
                   dispatch,

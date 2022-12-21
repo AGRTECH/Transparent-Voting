@@ -37,32 +37,32 @@ const showForm = (props) => {
       >
         <input
           type="text"
-          placeholder="Category"
+          placeholder=" Category"
           onChange={(e) => {
             dispatch(categoryChanged(e.target.value));
           }}
-          className="bg-dark text-white tableitemspacing"
+          className="bg-dark text-white tableitemspacing poll-input"
           required
         />
         <input
           type="text"
-          placeholder="Enter First Canidate"
+          placeholder=" Enter First Canidate"
           onChange={(e) => {
             dispatch(canidateOneChanged(e.target.value));
           }}
-          className="bg-dark text-white tableitemspacing"
+          className="bg-dark text-white tableitemspacing poll-input"
           required
         />
         <input
           type="text"
-          placeholder="Enter Second Canidate"
+          placeholder=" Enter Second Canidate"
           onChange={(e) => {
             dispatch(canidateTwoChanged(e.target.value));
           }}
-          className="bg-dark text-white tableitemspacing"
+          className="bg-dark text-white tableitemspacing poll-input"
           required
         />
-        <button className="btn btn-primary" type="submit">
+        <button className="btn btn-primary create-poll-btn" type="submit">
           Create Poll
         </button>
       </form>

@@ -19,11 +19,11 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <>
         <Navbar />
         <PollTabs />
         <ParticlesBg type="cobweb" bg={true} />
-      </div>
+      </>
     );
   }
 }

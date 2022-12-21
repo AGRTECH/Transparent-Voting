@@ -19,7 +19,10 @@ import { counter } from "../store/actions";
 const ActivePolls = (props) => {
   const renderPoll = (poll, props, timestampArr) => {
     const { dispatch, voting, account } = props;
+    let now = new Date();
+    let currentTime = now.getTime() / 1000;
     const gap = 1648797470;
+    console.log(poll.timestamp, currentTime);
     let formattedCanOne = poll.choice1
       .split("")
       .filter((a, b) => b !== 0)
@@ -39,7 +42,7 @@ const ActivePolls = (props) => {
       .join("");
 
     dispatch(counter(poll.timestamp - gap));
-    if (poll.timestamp - gap > 0) {
+    if (poll.timestamp > currentTime - 30) {
       return (
         <tr key={poll.id} className="">
           <td>{poll.id}</td>
@@ -81,7 +84,10 @@ const ActivePolls = (props) => {
               Vote
             </button>
           </td>
-          <Countdown time={30} timestampArr={timestampArr} />
+          <Countdown
+            time={poll.timestamp - (currentTime - 30)}
+            timestampArr={timestampArr}
+          />
           {/* ${poll.user.split("").splice(39, 4, "").join("") */}
           <td>{`${poll.user.split("").splice(0, 5, "").join("")}...${poll.user
             .split("")

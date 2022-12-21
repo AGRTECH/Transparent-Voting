@@ -17,10 +17,16 @@ contract Voting is ReentrancyGuard {
    // Variables and Mappings
    uint256 public pollCount;
    uint256 public voteId;
+   Tvote public tvote;
    mapping(uint256 => _Poll) public polls;
    mapping(uint256 => mapping(string => uint)) public votesPerChoicePerPoll;
    mapping(uint256 => mapping(address => bool)) public hasVotedOnPoll;
    
+   constructor(Tvote _tvote) public {
+    tvote = _tvote;
+    owner = msg.sender;
+  }
+
    // Events and Structs
    event PollEvent(
       uint256 id,
@@ -93,5 +99,11 @@ contract Voting is ReentrancyGuard {
 
       // Emit VoteEvent
       emit VoteEvent(voteId, _id, msg.sender, _poll, _choice, votesPerChoicePerPoll[_id][_choice], now);
+   }
+
+   function claimWinnings(uint _winnings) public nonReentrant {
+
+
+      tvote.transfer(msg.sender, _winnings);
    }
 }

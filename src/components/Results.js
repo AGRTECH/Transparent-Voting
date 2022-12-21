@@ -20,6 +20,8 @@ const Results = (props) => {
   const renderResult = (poll, props) => {
     const { votingLoaded, allPollsLoaded, allVotes, allVotesLoaded } = props;
     const gap = 1649897470;
+    let now = new Date();
+    let currentTime = now.getTime() / 1000;
     let votes1 = 0;
     let votes2 = 0;
     if (allVotesLoaded) {
@@ -55,7 +57,7 @@ const Results = (props) => {
       .filter((a, b) => b !== 0)
       .map((c, d) => c.toLowerCase())
       .join("");
-    if (poll.timestamp - gap <= 0) {
+    if (poll.timestamp < currentTime - 30) {
       return (
         <tr key={poll.id} className="">
           <td>{poll.id}</td>

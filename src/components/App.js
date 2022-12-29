@@ -3,8 +3,10 @@ import { connect } from "react-redux";
 import "./App.css";
 import Navbar from "./Navbar";
 import PollTabs from "./PollTabs";
+import CreatePoll from "./CreatePoll";
 import { loadAccount, loadWeb3 } from "../store/interactions";
 import ParticlesBg from "particles-bg";
+import bg from "../img/blackbgfinall.png";
 
 class App extends Component {
   UNSAFE_componentWillMount() {
@@ -20,9 +22,11 @@ class App extends Component {
   render() {
     return (
       <>
+        {/* <div className="w3r-dot"></div> */}
+        <img src={bg} alt="" className="circular-bg" />
+        <div className="w3r-dot"></div>
         <Navbar />
         <PollTabs />
-        <ParticlesBg type="cobweb" bg={true} />
       </>
     );
   }

@@ -38,7 +38,7 @@ const Navbar = (props) => {
   }, []);
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark navflex">
+    <nav className="navbar navbar-expand-lg navbar-dark  navflex">
       <img className="logo-img" src={logo} alt="" />
       {props.accountLoaded ? (
         <a className=" nav-account">

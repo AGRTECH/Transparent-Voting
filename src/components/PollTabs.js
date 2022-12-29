@@ -37,19 +37,9 @@ class PollTabs extends Component {
   render() {
     return (
       <>
-        <div className="container">
-          <Tabs defaultActiveKey="polls" className="mb-3 poll-tab">
-            <Tab eventKey="create" title="Create Poll">
-              <CreatePoll />
-            </Tab>
-            <Tab eventKey="polls" title="Active Polls">
-              <ActivePolls />
-            </Tab>
-            <Tab eventKey="results" title="Poll Results">
-              <Results />
-            </Tab>
-          </Tabs>
-        </div>
+        <CreatePoll />
+        {/* <ActivePolls /> */}
+        {/* <Results /> */}
       </>
     );
   }

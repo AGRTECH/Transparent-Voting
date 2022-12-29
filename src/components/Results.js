@@ -59,19 +59,21 @@ const Results = (props) => {
       .join("");
     if (poll.timestamp < currentTime - 30) {
       return (
-        <tr key={poll.id} className="">
-          <td>{poll.id}</td>
-          <td>{poll.poll[0].toUpperCase() + formattedCat}</td>
-          <td>
+        <tr key={poll.id} className="results-heads">
+          <td className="results-sections">{poll.id}</td>
+          <td className="results-sections">
+            {poll.poll[0].toUpperCase() + formattedCat}
+          </td>
+          <td className="results-sections">
             <p>{poll.choice1[0].toUpperCase() + formattedCanOne}</p>
           </td>
 
-          <td>
+          <td className="results-sections">
             <p>{poll.choice2[0].toUpperCase() + formattedCanTwo}</p>
           </td>
-          <td>{votes1}</td>
-          <td>{votes2}</td>
-          <td className="text-success">
+          <td className="results-sections">{votes1}</td>
+          <td className="results-sections">{votes2}</td>
+          <td className="text-success results-sections">
             {votingLoaded && allPollsLoaded && allVotesLoaded && votes1 > votes2
               ? poll.choice1[0].toUpperCase() + formattedCanOne
               : votes2 > votes1
@@ -87,8 +89,8 @@ const Results = (props) => {
     const { allPolls, allPollsLoaded } = props;
 
     return (
-      <tbody className="">
-        <tr>
+      <tbody>
+        <tr className="results-heads">
           <th>Poll #</th>
           <th>Poll Category</th>
           <th>Canidate One</th>

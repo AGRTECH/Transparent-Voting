@@ -65,6 +65,14 @@ body {
   border-collapse: separate !important;
   margin-top: 60px;
   margin-bottom: 100px;
+  color: rgb(194, 194, 194);
+  font-size: 13px;
+}
+
+.results-sections {
+  border: 1px solid rgb(47, 47, 47);
+  padding-left: 10px;
+  width: 100px;
 }
 
 .real-time-polls {
@@ -74,7 +82,7 @@ body {
 
 .real-time-polls-sections {
   font-size: 14px;
-  border-right: 1px solid rgb(47, 47, 47);
+  border: 1px solid rgb(47, 47, 47);
   padding-left: 10px;
   width: 100px;
 }

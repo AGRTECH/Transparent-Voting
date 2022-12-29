@@ -42,12 +42,14 @@ const ActivePolls = (props) => {
       .join("");
 
     dispatch(counter(poll.timestamp - gap));
-    if (poll.timestamp > currentTime - 30) {
+    if (poll.timestamp > currentTime - 43200) {
       return (
-        <tr key={poll.id} className="">
-          <td>{poll.id}</td>
-          <td>{poll.poll[0].toUpperCase() + formattedCat}</td>
-          <td>
+        <tr key={poll.id} className="real-time-polls">
+          <td className="real-time-polls-sections">{poll.id}</td>
+          <td className="real-time-polls-sections">
+            {poll.poll[0].toUpperCase() + formattedCat}
+          </td>
+          <td className="real-time-polls-sections">
             <p>{poll.choice1[0].toUpperCase() + formattedCanOne}</p>
             <button
               className="btn btn-primary active-poll-btn"
@@ -66,7 +68,7 @@ const ActivePolls = (props) => {
             </button>
           </td>
 
-          <td>
+          <td className="real-time-polls-sections">
             <p>{poll.choice2[0].toUpperCase() + formattedCanTwo}</p>
             <button
               className="btn btn-primary active-poll-btn"
@@ -85,11 +87,13 @@ const ActivePolls = (props) => {
             </button>
           </td>
           <Countdown
-            time={poll.timestamp - (currentTime - 30)}
+            time={poll.timestamp - (currentTime - 43200)}
             timestampArr={timestampArr}
           />
-          {/* ${poll.user.split("").splice(39, 4, "").join("") */}
-          <td>{`${poll.user.split("").splice(0, 5, "").join("")}...${poll.user
+          <td className="real-time-polls-sections-last">{`${poll.user
+            .split("")
+            .splice(0, 5, "")
+            .join("")}...${poll.user
             .split("")
             .splice(38, 4, "")
             .join("")}`}</td>
@@ -106,14 +110,14 @@ const ActivePolls = (props) => {
     }
 
     return (
-      <tbody>
+      <tbody className="">
         <tr>
-          <th>Poll #</th>
-          <th>Poll Category</th>
-          <th>Canidate One</th>
-          <th>Canidate Two</th>
-          <th>Time Remaining</th>
-          <th>Submitted By</th>
+          <th className="active-polls-sections">#</th>
+          <th className="active-polls-sections">Category</th>
+          <th className="active-polls-sections">Canidate One</th>
+          <th className="active-polls-sections">Canidate Two</th>
+          <th className="active-polls-sections">Time</th>
+          <th className="active-polls-sections-last">Submitted By</th>
         </tr>
         {allPollsLoaded && allPolls.data.length > 0 ? (
           allPolls.data.map((poll) => renderPoll(poll, props, timestampArr))
@@ -127,7 +131,7 @@ const ActivePolls = (props) => {
   };
 
   return (
-    <table className="table table-dark">
+    <table className="active-polls-container">
       {props.pollCreated ? (
         showAllPolls(props)
       ) : (

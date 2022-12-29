@@ -22,9 +22,6 @@ class App extends Component {
   render() {
     return (
       <>
-        {/* <div className="w3r-dot"></div> */}
-        <img src={bg} alt="" className="circular-bg" />
-        <div className="w3r-dot"></div>
         <Navbar />
         <PollTabs />
       </>

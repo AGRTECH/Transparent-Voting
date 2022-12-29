@@ -87,7 +87,7 @@ const Results = (props) => {
     const { allPolls, allPollsLoaded } = props;
 
     return (
-      <tbody>
+      <tbody className="">
         <tr>
           <th>Poll #</th>
           <th>Poll Category</th>
@@ -109,7 +109,7 @@ const Results = (props) => {
   };
 
   return (
-    <table className="table table-dark">
+    <table className="results-container">
       {props.pollCreated ? (
         showAllResults(props)
       ) : (

@@ -10,6 +10,7 @@ import "openzeppelin-solidity/contracts/utils/ReentrancyGuard.sol";
    // [x] Set a voting time period (JS)
    // [x] At the end of the period, the one with more votes wins (JS)
    // [] If the user guesses the right canidate, they win tokens
+   // [] Owner able to remove results
 
 contract Voting is ReentrancyGuard {
    using SafeMath for uint;
@@ -106,4 +107,8 @@ contract Voting is ReentrancyGuard {
 
       tvote.transfer(msg.sender, _winnings);
    }
+
+   // function removeResult(uint256 _id) onlyOwner {
+
+   // }
 }

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import ActivePolls from "./ActivePolls";
+import Results from "./Results";
 import "./App.css";
 import {
   categoryChanged,
@@ -22,53 +23,56 @@ const showForm = (props) => {
     props;
   return (
     <>
-      <div className="create-active-container">
-        <form
-          className="create-poll-form"
-          onSubmit={(e) => {
-            e.preventDefault();
-            createPollFunc(
-              dispatch,
-              voting,
-              account,
-              category,
-              canidateOne,
-              canidateTwo
-            );
-          }}
-        >
-          <input
-            type="text"
-            placeholder=" Category"
-            onChange={(e) => {
-              dispatch(categoryChanged(e.target.value));
+      <div className="all-container">
+        <div className="create-active-container">
+          <form
+            className="create-poll-form"
+            onSubmit={(e) => {
+              e.preventDefault();
+              createPollFunc(
+                dispatch,
+                voting,
+                account,
+                category,
+                canidateOne,
+                canidateTwo
+              );
             }}
-            className="poll-input"
-            required
-          />
-          <input
-            type="text"
-            placeholder=" Enter First Canidate"
-            onChange={(e) => {
-              dispatch(canidateOneChanged(e.target.value));
-            }}
-            className="poll-input"
-            required
-          />
-          <input
-            type="text"
-            placeholder=" Enter Second Canidate"
-            onChange={(e) => {
-              dispatch(canidateTwoChanged(e.target.value));
-            }}
-            className="poll-input"
-            required
-          />
-          <button className="btn btn-primary create-poll-btn" type="submit">
-            Create Poll
-          </button>
-        </form>
-        <ActivePolls />
+          >
+            <input
+              type="text"
+              placeholder=" Category"
+              onChange={(e) => {
+                dispatch(categoryChanged(e.target.value));
+              }}
+              className="poll-input"
+              required
+            />
+            <input
+              type="text"
+              placeholder=" Enter First Canidate"
+              onChange={(e) => {
+                dispatch(canidateOneChanged(e.target.value));
+              }}
+              className="poll-input"
+              required
+            />
+            <input
+              type="text"
+              placeholder=" Enter Second Canidate"
+              onChange={(e) => {
+                dispatch(canidateTwoChanged(e.target.value));
+              }}
+              className="poll-input"
+              required
+            />
+            <button className="btn btn-primary create-poll-btn" type="submit">
+              Create Poll
+            </button>
+          </form>
+          <ActivePolls />
+        </div>
+        <Results />
       </div>
     </>
   );

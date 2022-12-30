@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import "./App.css";
+import leftArrow from "../img/leftarrow.png";
+import rightArrow from "../img/rightarrow.png";
 import {
   votingSelector,
   web3Selector,
@@ -57,7 +59,11 @@ const Results = (props) => {
       .filter((a, b) => b !== 0)
       .map((c, d) => c.toLowerCase())
       .join("");
-    if (poll.timestamp < currentTime - 43200) {
+    if (
+      poll.timestamp < currentTime - 43200 &&
+      poll.id >= firstPoll &&
+      poll.id <= lastPoll
+    ) {
       return (
         <tr key={poll.id} className="results-heads">
           <td className="results-sections">{poll.id}</td>
@@ -84,6 +90,19 @@ const Results = (props) => {
       );
     }
   };
+
+  const [firstPoll, setFirstPoll] = useState(0);
+  const [lastPoll, setLastPoll] = useState(0);
+
+  // Table pagination
+  useEffect(() => {
+    setFirstPoll(
+      props.allPollsLoaded
+        ? props.allPolls.data.length - (props.allPolls.data.length + 1)
+        : 0
+    );
+    setLastPoll(props.allPollsLoaded ? props.allPolls.data.length - 9 : 0);
+  }, [props.allPollsLoaded]);
 
   const showAllResults = (props) => {
     const { allPolls, allPollsLoaded } = props;
@@ -121,6 +140,32 @@ const Results = (props) => {
           </tr>
         </tbody>
       )}
+      <img
+        src={leftArrow}
+        style={{ width: "20px", height: "15px" }}
+        alt=""
+        onClick={() => {
+          setFirstPoll((poll) => {
+            return poll - 9;
+          });
+          setLastPoll((poll) => {
+            return poll - 9;
+          });
+        }}
+      />
+      <img
+        src={rightArrow}
+        style={{ width: "20px", height: "15px" }}
+        alt=""
+        onClick={() => {
+          setFirstPoll((poll) => {
+            return poll + 9;
+          });
+          setLastPoll((poll) => {
+            return poll + 9;
+          });
+        }}
+      />
     </table>
   );
 };

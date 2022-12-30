@@ -57,7 +57,7 @@ const Results = (props) => {
       .filter((a, b) => b !== 0)
       .map((c, d) => c.toLowerCase())
       .join("");
-    if (poll.timestamp < currentTime - 30) {
+    if (poll.timestamp < currentTime - 43200) {
       return (
         <tr key={poll.id} className="results-heads">
           <td className="results-sections">{poll.id}</td>

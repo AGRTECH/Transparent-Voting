@@ -81,14 +81,15 @@ body {
 }
 
 .real-time-polls-sections {
-  font-size: 14px;
+  font-size: 13px;
   border: 1px solid rgb(47, 47, 47);
   padding-left: 10px;
+  height: 100px;
   width: 100px;
 }
 
 .real-time-polls-sections-last {
-  font-size: 14px;
+  font-size: 13px;
   padding-left: 10px;
   padding-right: 10px;
 }
@@ -157,11 +158,16 @@ body {
 .active-poll-btn {
   background-color: #6a4597;
   border: 3px solid black;
+  font-size: 12px;
 }
 
 .active-poll-btn:hover {
   background-color: #482f67;
   border: 3px solid black;
+}
+
+.active-poll-canidate {
+  margin-top: 50px;
 }
 
 .create-poll-btn:hover {

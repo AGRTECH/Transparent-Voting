@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { connect } from "react-redux";
 import ActivePolls from "./ActivePolls";
 import Results from "./Results";
@@ -18,15 +18,19 @@ import {
   accountSelector,
 } from "../store/selectors";
 
-const showForm = (props) => {
+const ShowForm = (props) => {
   const { dispatch, voting, category, canidateOne, canidateTwo, account } =
     props;
+
+  const [pollClicked, setPollClicked] = useState(true);
+  const [voteClicked, setVoteClicked] = useState(false);
+
   return (
     <>
       <div className="all-container">
         <div className="create-active-container">
           <form
-            className="create-poll-form"
+            className={`${pollClicked ? "create-poll-form" : ""}`}
             onSubmit={(e) => {
               e.preventDefault();
               createPollFunc(
@@ -39,6 +43,15 @@ const showForm = (props) => {
               );
             }}
           >
+            <p
+              onClick={() => {
+                setVoteClicked(true);
+                setPollClicked(false);
+                console.log(voteClicked);
+              }}
+            >
+              Vote
+            </p>
             <input
               type="text"
               placeholder=" Category"
@@ -78,11 +91,9 @@ const showForm = (props) => {
   );
 };
 
-class CreatePoll extends Component {
-  render() {
-    return <div>{showForm(this.props)}</div>;
-  }
-}
+const CreatePoll = (props) => {
+  return <div>{ShowForm(props)}</div>;
+};
 function mapStateToProps(state) {
   return {
     voting: votingSelector(state),

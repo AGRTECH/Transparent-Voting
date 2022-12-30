@@ -89,7 +89,6 @@ export const createPollFunc = (
     })
     .on("error", (error) => {
       console.error(error);
-      window.alert(`There was an error!`);
     });
 };
 
@@ -102,6 +101,5 @@ export const voteFunc = (dispatch, voting, account, choice, poll, id) => {
     })
     .on("error", (error) => {
       console.error(error);
-      window.alert(`There was an error!`);
     });
 };

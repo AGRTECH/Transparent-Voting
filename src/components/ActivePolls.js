@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import "./App.css";
+import leftArrow from "../img/leftarrow.png";
+import rightArrow from "../img/rightarrow.png";
 import {
   votingSelector,
   web3Selector,
@@ -14,15 +16,49 @@ import {
 } from "../store/selectors";
 import { voteFunc } from "../store/interactions";
 import Countdown from "./Countdown";
+import SpinnerAnimation from "./Spinner";
 import { counter } from "../store/actions";
+import { Pagination } from "react-bootstrap";
 
 const ActivePolls = (props) => {
-  const renderPoll = (poll, props, timestampArr) => {
+  function TablePagnation() {
+    return (
+      <Pagination>
+        <Pagination.First />
+        <Pagination.Prev />
+        <Pagination.Item>{1}</Pagination.Item>
+        <Pagination.Ellipsis />
+
+        <Pagination.Item>{10}</Pagination.Item>
+        <Pagination.Item>{11}</Pagination.Item>
+        <Pagination.Item active>{12}</Pagination.Item>
+        <Pagination.Item>{13}</Pagination.Item>
+        <Pagination.Item disabled>{14}</Pagination.Item>
+
+        <Pagination.Ellipsis />
+        <Pagination.Item>{20}</Pagination.Item>
+        <Pagination.Next />
+        <Pagination.Last />
+      </Pagination>
+    );
+  }
+  let now = new Date();
+  let currentTime = now.getTime() / 1000;
+  // poll.id > firstPoll &&
+  // poll.id < lastPoll
+
+  const RenderPoll = (poll, props, timestampArr) => {
     const { dispatch, voting, account } = props;
+
+    let pollIdsArr = [];
+
+    for (let i = 1; i <= poll.id; i++) {
+      pollIdsArr.push(i);
+    }
+
     let now = new Date();
     let currentTime = now.getTime() / 1000;
     const gap = 1648797470;
-    console.log(poll.timestamp, currentTime);
     let formattedCanOne = poll.choice1
       .split("")
       .filter((a, b) => b !== 0)
@@ -41,8 +77,12 @@ const ActivePolls = (props) => {
       .map((c, d) => c.toLowerCase())
       .join("");
 
-    dispatch(counter(poll.timestamp - gap));
-    if (poll.timestamp > currentTime - 43200) {
+    // dispatch(counter(poll.timestamp - gap));
+    if (
+      poll.timestamp > currentTime - 43200 &&
+      poll.id >= firstPoll &&
+      poll.id <= lastPoll
+    ) {
       return (
         <tr key={poll.id} className="real-time-polls">
           <td className="real-time-polls-sections">{poll.id}</td>
@@ -50,7 +90,9 @@ const ActivePolls = (props) => {
             {poll.poll[0].toUpperCase() + formattedCat}
           </td>
           <td className="real-time-polls-sections">
-            <p>{poll.choice1[0].toUpperCase() + formattedCanOne}</p>
+            <p className="active-poll-canidate">
+              {poll.choice1[0].toUpperCase() + formattedCanOne}
+            </p>
             <button
               className="btn btn-primary active-poll-btn"
               onClick={(e) => {
@@ -69,7 +111,9 @@ const ActivePolls = (props) => {
           </td>
 
           <td className="real-time-polls-sections">
-            <p>{poll.choice2[0].toUpperCase() + formattedCanTwo}</p>
+            <p className="active-poll-canidate">
+              {poll.choice2[0].toUpperCase() + formattedCanTwo}
+            </p>
             <button
               className="btn btn-primary active-poll-btn"
               onClick={(e) => {
@@ -101,13 +145,33 @@ const ActivePolls = (props) => {
       );
     }
   };
+
+  let initalState = 0;
+  if (props.allPollsLoaded) {
+    initalState = props.allPolls.data.length - 1;
+  }
+
+  const [firstPoll, setFirstPoll] = useState(0);
+  const [lastPoll, setLastPoll] = useState(0);
+
+  // Table pagination
+  useEffect(() => {
+    setFirstPoll(props.allPollsLoaded ? props.allPolls.data.length - 2 : 0);
+    setLastPoll(props.allPollsLoaded ? props.allPolls.data.length : 0);
+  }, [props.allPollsLoaded]);
+
   let timestampArr = [];
+  let activePollsArr = [];
   const showAllPolls = (props) => {
     const { allPolls, allPollsLoaded } = props;
     const gap = 1647397470;
     for (let i = 0; i < allPolls.data.length; i++) {
       timestampArr.push(allPolls.data[i].timestamp - gap);
     }
+
+    // if (allPollsLoaded) {
+    //   setLastPoll(15);
+    // }
 
     return (
       <tbody className="">
@@ -120,7 +184,7 @@ const ActivePolls = (props) => {
           <th className="active-polls-sections-last">Submitted By</th>
         </tr>
         {allPollsLoaded && allPolls.data.length > 0 ? (
-          allPolls.data.map((poll) => renderPoll(poll, props, timestampArr))
+          allPolls.data.map((poll) => RenderPoll(poll, props, timestampArr))
         ) : (
           <tr>
             <td>No polls to show...</td>
@@ -141,6 +205,34 @@ const ActivePolls = (props) => {
           </tr>
         </tbody>
       )}
+      <td>
+        <img
+          src={leftArrow}
+          style={{ width: "20px", height: "15px" }}
+          alt=""
+          onClick={() => {
+            setFirstPoll((poll) => {
+              return poll - 3;
+            });
+            setLastPoll((poll) => {
+              return poll - 3;
+            });
+          }}
+        />
+        <img
+          src={rightArrow}
+          style={{ width: "20px", height: "15px" }}
+          alt=""
+          onClick={() => {
+            setFirstPoll((poll) => {
+              return poll + 3;
+            });
+            setLastPoll((poll) => {
+              return poll + 3;
+            });
+          }}
+        />
+      </td>
     </table>
   );
 };

@@ -19,6 +19,8 @@ import {
 } from "../store/selectors";
 
 const Results = (props) => {
+  let resultsArr = [];
+  let fullResultsArr = [];
   const renderResult = (poll, props) => {
     const { votingLoaded, allPollsLoaded, allVotes, allVotesLoaded } = props;
     const gap = 1649897470;
@@ -26,6 +28,7 @@ const Results = (props) => {
     let currentTime = now.getTime() / 1000;
     let votes1 = 0;
     let votes2 = 0;
+
     if (allVotesLoaded) {
       for (let i = 0; i < allVotes.length; i++) {
         if (
@@ -59,11 +62,19 @@ const Results = (props) => {
       .filter((a, b) => b !== 0)
       .map((c, d) => c.toLowerCase())
       .join("");
+
+    if (poll.timestamp < currentTime - 43200) {
+      fullResultsArr.push(parseInt(poll.id));
+    }
+
     if (
       poll.timestamp < currentTime - 43200 &&
       poll.id >= firstPoll &&
       poll.id <= lastPoll
     ) {
+      {
+        resultsArr.push(parseInt(poll.id));
+      }
       return (
         <tr key={poll.id} className="results-heads">
           <td className="results-sections">{poll.id}</td>
@@ -91,18 +102,18 @@ const Results = (props) => {
     }
   };
 
-  const [firstPoll, setFirstPoll] = useState(0);
-  const [lastPoll, setLastPoll] = useState(0);
+  const [firstPoll, setFirstPoll] = useState(1);
+  const [lastPoll, setLastPoll] = useState(7);
 
   // Table pagination
-  useEffect(() => {
-    setFirstPoll(
-      props.allPollsLoaded
-        ? props.allPolls.data.length - (props.allPolls.data.length + 1)
-        : 0
-    );
-    setLastPoll(props.allPollsLoaded ? props.allPolls.data.length - 9 : 0);
-  }, [props.allPollsLoaded]);
+  // useEffect(() => {
+  //   setFirstPoll(
+  //     props.allPollsLoaded
+  //       ? props.allPolls.data.length - (props.allPolls.data.length + 1)
+  //       : 0
+  //   );
+  //   setLastPoll(props.allPollsLoaded ? firstPoll + 8 : 0);
+  // }, [props.allPollsLoaded]);
 
   const showAllResults = (props) => {
     const { allPolls, allPollsLoaded } = props;
@@ -145,12 +156,16 @@ const Results = (props) => {
         style={{ width: "20px", height: "15px" }}
         alt=""
         onClick={() => {
-          setFirstPoll((poll) => {
-            return poll - 9;
-          });
-          setLastPoll((poll) => {
-            return poll - 9;
-          });
+          if (firstPoll - 1 == 0) {
+            return;
+          } else {
+            setFirstPoll((poll) => {
+              return poll - 7;
+            });
+            setLastPoll((poll) => {
+              return poll - 7;
+            });
+          }
         }}
       />
       <img
@@ -158,12 +173,16 @@ const Results = (props) => {
         style={{ width: "20px", height: "15px" }}
         alt=""
         onClick={() => {
-          setFirstPoll((poll) => {
-            return poll + 9;
-          });
-          setLastPoll((poll) => {
-            return poll + 9;
-          });
+          if (!fullResultsArr.includes(resultsArr[0] + 7)) {
+            return;
+          } else {
+            setFirstPoll((poll) => {
+              return poll + 7;
+            });
+            setLastPoll((poll) => {
+              return poll + 7;
+            });
+          }
         }}
       />
     </table>

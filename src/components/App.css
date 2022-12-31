@@ -83,6 +83,7 @@ body {
 .real-time-polls-sections {
   font-size: 13px;
   border: 1px solid rgb(47, 47, 47);
+  /* border-bottom: 1px solid rgb(47, 47, 47); */
   padding-left: 10px;
   height: 100px;
   width: 100px;
@@ -90,6 +91,7 @@ body {
 
 .real-time-polls-sections-last {
   font-size: 13px;
+  border: 1px solid rgb(47, 47, 47);
   padding-left: 10px;
   padding-right: 10px;
 }
@@ -189,6 +191,7 @@ body {
   border: 2px rgba(0, 0, 0, 0.3) solid;
   font-weight: bold;
   margin-right: 20px;
+  text-decoration: none;
 }
 
 .nav-account:hover {

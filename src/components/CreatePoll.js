@@ -30,7 +30,7 @@ const ShowForm = (props) => {
       <div className="all-container">
         <div className="create-active-container">
           <form
-            className={`${pollClicked ? "create-poll-form" : ""}`}
+            className="create-poll-form"
             onSubmit={(e) => {
               e.preventDefault();
               createPollFunc(
@@ -43,15 +43,6 @@ const ShowForm = (props) => {
               );
             }}
           >
-            <p
-              onClick={() => {
-                setVoteClicked(true);
-                setPollClicked(false);
-                console.log(voteClicked);
-              }}
-            >
-              Vote
-            </p>
             <input
               type="text"
               placeholder=" Category"

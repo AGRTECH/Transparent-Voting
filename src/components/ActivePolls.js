@@ -46,15 +46,11 @@ const ActivePolls = (props) => {
   let currentTime = now.getTime() / 1000;
   // poll.id > firstPoll &&
   // poll.id < lastPoll
+  let activeArr = [];
+  let fullActiveArr = [];
 
   const RenderPoll = (poll, props, timestampArr) => {
     const { dispatch, voting, account } = props;
-
-    let pollIdsArr = [];
-
-    for (let i = 1; i <= poll.id; i++) {
-      pollIdsArr.push(i);
-    }
 
     let now = new Date();
     let currentTime = now.getTime() / 1000;
@@ -77,12 +73,18 @@ const ActivePolls = (props) => {
       .map((c, d) => c.toLowerCase())
       .join("");
 
-    // dispatch(counter(poll.timestamp - gap));
+    if (poll.timestamp > currentTime - 43200) {
+      fullActiveArr.push(parseInt(poll.id));
+    }
+
     if (
       poll.timestamp > currentTime - 43200 &&
       poll.id >= firstPoll &&
       poll.id <= lastPoll
     ) {
+      {
+        activeArr.push(parseInt(poll.id));
+      }
       return (
         <tr key={poll.id} className="real-time-polls">
           <td className="real-time-polls-sections">{poll.id}</td>
@@ -161,7 +163,6 @@ const ActivePolls = (props) => {
   }, [props.allPollsLoaded]);
 
   let timestampArr = [];
-  let activePollsArr = [];
   const showAllPolls = (props) => {
     const { allPolls, allPollsLoaded } = props;
     const gap = 1647397470;
@@ -211,12 +212,17 @@ const ActivePolls = (props) => {
           style={{ width: "20px", height: "15px" }}
           alt=""
           onClick={() => {
-            setFirstPoll((poll) => {
-              return poll - 3;
-            });
-            setLastPoll((poll) => {
-              return poll - 3;
-            });
+            if (!fullActiveArr.includes(activeArr[activeArr.length - 1] - 3)) {
+              return;
+            } else {
+              setFirstPoll((poll) => {
+                return poll - 3;
+              });
+              setLastPoll((poll) => {
+                return poll - 3;
+              });
+              console.log(activeArr, lastPoll);
+            }
           }}
         />
         <img
@@ -224,12 +230,16 @@ const ActivePolls = (props) => {
           style={{ width: "20px", height: "15px" }}
           alt=""
           onClick={() => {
-            setFirstPoll((poll) => {
-              return poll + 3;
-            });
-            setLastPoll((poll) => {
-              return poll + 3;
-            });
+            if (props.allPolls.data.length <= lastPoll) {
+              return;
+            } else {
+              setFirstPoll((poll) => {
+                return poll + 3;
+              });
+              setLastPoll((poll) => {
+                return poll + 3;
+              });
+            }
           }}
         />
       </td>

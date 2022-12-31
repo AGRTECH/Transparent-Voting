@@ -2,6 +2,7 @@ import React, { Component, useState } from "react";
 import { connect } from "react-redux";
 import ActivePolls from "./ActivePolls";
 import Results from "./Results";
+import QuestionOverlay from "./QuestionOverlay";
 import "./App.css";
 import {
   categoryChanged,
@@ -43,6 +44,12 @@ const ShowForm = (props) => {
               );
             }}
           >
+            <p className="create-poll-title">Create Poll</p>
+            <p className="create-poll-title-desc">
+              web3.0 voter corruption solution
+            </p>
+            <QuestionOverlay />
+            <div className="bar"></div>
             <input
               type="text"
               placeholder=" Category"

@@ -32,9 +32,9 @@ body {
   align-items: center;
   background-color: rgba(32, 32, 32, 0.98);
   height: 450px;
-  width: 500px;
+  width: 300px;
   margin-right: 60px;
-  border: 1px solid rgba(0, 0, 0, 0.24);
+  border: 3px solid rgba(0, 0, 0, 0.24);
   border-radius: 2%;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
@@ -47,8 +47,8 @@ body {
 }
 
 .active-polls-container {
-  /* border: 1px solid rgba(0, 0, 0, 0.24); */
-  border-radius: 2%;
+  border: 3px solid rgba(0, 0, 0, 0.24);
+  border-radius: 12px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   background-color: rgba(32, 32, 32, 0.98);
   height: 450px;
@@ -57,7 +57,8 @@ body {
 }
 
 .results-container {
-  border-radius: 2%;
+  border: 3px solid rgba(0, 0, 0, 0.24);
+  border-radius: 12px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   background-color: rgba(32, 32, 32, 0.98);
   height: 450px;
@@ -140,32 +141,57 @@ body {
   position: relative;
 }
 
+.create-poll-title {
+  /* color: rgb(60, 60, 60); */
+  color: rgb(95, 95, 95);
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: -55px;
+  margin-bottom: 35px;
+  margin-right: 150px;
+}
+
+.create-poll-title-desc {
+  color: rgb(60, 60, 60);
+  font-size: 12px;
+  margin-right: 150px;
+  margin-top: -30px;
+  width: 100%;
+  margin-left: 230px;
+}
+
 .poll-input {
-  width: 60%;
-  background-color: rgb(86, 86, 86);
-  border: 1px solid rgb(224, 224, 224);
+  width: 80%;
+  /* background-color: rgb(86, 86, 86); */
+  background-color: rgb(50, 50, 50);
+  border: 1px solid rgb(70, 70, 70);
   box-shadow: 2px 9px 5px 0px rgba(0, 0, 0, 0.11);
   padding: 10px;
   margin-bottom: 15px;
+  border-radius: 10px;
 }
 
 .create-poll-btn {
-  width: 25%;
+  width: 80%;
   align-self: center;
   margin-top: 5px;
   background-color: #6a4597;
-  border: 3px solid black;
+  border-radius: 12px;
+  /* border: 3px solid black; */
+  border: 3px solid #261936;
 }
 
 .active-poll-btn {
   background-color: #6a4597;
-  border: 3px solid black;
+  /* border: 3px solid black; */
+  border: 3px solid #261936;
   font-size: 12px;
+  border-radius: 12px;
 }
 
 .active-poll-btn:hover {
   background-color: #482f67;
-  border: 3px solid black;
+  border: 3px solid #261936;
 }
 
 .active-poll-canidate {
@@ -174,7 +200,7 @@ body {
 
 .create-poll-btn:hover {
   background-color: #482f67;
-  border: 3px solid black;
+  border: 3px solid #261936;
 }
 
 .logo-img {
@@ -212,6 +238,16 @@ body {
 
 .nav-link:hover {
   color: #734ba4;
+}
+
+.tooltip-text {
+  color: blue;
+}
+
+.bar {
+  padding: 1px 150px;
+  background-color: rgba(0, 0, 0, 0.2);
+  margin-bottom: 25px;
 }
 
 @media (max-width: 1080px) {

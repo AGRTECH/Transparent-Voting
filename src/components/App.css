@@ -50,7 +50,7 @@ body {
   border: 3px solid rgba(0, 0, 0, 0.24);
   border-radius: 12px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  background-color: rgba(32, 32, 32, 0.98);
+  /* background-color: rgba(32, 32, 32, 0.98); */
   height: 450px;
   width: 500px;
   border-collapse: separate !important;
@@ -83,7 +83,9 @@ body {
 
 .real-time-polls-sections {
   font-size: 13px;
-  border: 1px solid rgb(47, 47, 47);
+  font-weight: bold;
+  /* border: 1px solid rgb(47, 47, 47); */
+  background-color: rgba(32, 32, 32, 0.88);
   /* border-bottom: 1px solid rgb(47, 47, 47); */
   padding-left: 10px;
   height: 100px;
@@ -92,27 +94,32 @@ body {
 
 .real-time-polls-sections-last {
   font-size: 13px;
-  border: 1px solid rgb(47, 47, 47);
+  font-weight: bold;
+  /* border: 1px solid rgb(47, 47, 47); */
   padding-left: 10px;
   padding-right: 10px;
+  background-color: rgba(32, 32, 32, 0.88);
 }
 
 .active-polls-titles {
   display: flex;
   margin-left: 20px;
   margin-top: 20px;
+  background-color: rgba(32, 32, 32, 0.48);
 }
 
 .active-polls-sections {
   color: rgb(194, 194, 194);
+  background-color: rgba(32, 32, 32, 0.78);
   font-size: 13px;
-  border-right: 1px solid rgb(47, 47, 47);
+  /* border-right: 1px solid rgb(47, 47, 47); */
   width: 100px;
   padding-left: 10px;
 }
 
 .active-polls-sections-last {
   color: rgb(194, 194, 194);
+  background-color: rgba(32, 32, 32, 0.78);
   font-size: 13px;
   padding-left: 10px;
   padding-right: 10px;

@@ -138,7 +138,7 @@ const ActivePolls = (props) => {
           />
           <td className="real-time-polls-sections-last">{`${poll.user
             .split("")
-            .splice(0, 5, "")
+            .splice(0, 2, "")
             .join("")}...${poll.user
             .split("")
             .splice(38, 4, "")
@@ -206,7 +206,7 @@ const ActivePolls = (props) => {
           </tr>
         </tbody>
       )}
-      <td>
+      <td style={{ backgroundColor: "rgba(32, 32, 32, 0.88)" }}>
         <img
           src={leftArrow}
           style={{ width: "20px", height: "15px" }}
@@ -227,7 +227,10 @@ const ActivePolls = (props) => {
         />
         <img
           src={rightArrow}
-          style={{ width: "20px", height: "15px" }}
+          style={{
+            width: "20px",
+            height: "15px",
+          }}
           alt=""
           onClick={() => {
             if (props.allPolls.data.length <= lastPoll) {

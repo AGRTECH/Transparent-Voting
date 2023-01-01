@@ -8,6 +8,7 @@ import {
   votingLoadedSelector,
 } from "../store/selectors";
 import logo from "../img/Transparentlogo.png";
+import ethLogo from "../img/ethlogo.svg";
 import Web3 from "web3";
 
 const Navbar = (props) => {
@@ -43,6 +44,24 @@ const Navbar = (props) => {
       <img className="logo-img" src={logo} alt="" />
       <div>
         <img
+          src={ethLogo}
+          style={{
+            width: "50px",
+            height: "45px",
+            zIndex: "100",
+            marginRight: "-32px",
+            marginBottom: "5px",
+            position: "relative",
+          }}
+          alt=""
+        />
+        <a className="nav-account">
+          {window.ethereum.networkVersion === "5" && props.votingLoaded
+            ? "Goerli"
+            : "---"}
+          {console.log(typeof window.ethereum.networkVersion)}
+        </a>
+        <img
           src={wallet}
           style={{
             width: "55px",
@@ -67,7 +86,7 @@ const Navbar = (props) => {
                   .split("")
                   .splice(38, 4, "")
                   .join("")}`
-              : window.ethereum.networkVersion !== 5 && account.length > 1
+              : window.ethereum.networkVersion !== "5" && account.length > 1
               ? "Please Switch to Goerli"
               : "Connect Wallet"}
           </a>

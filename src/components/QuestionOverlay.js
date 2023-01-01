@@ -19,6 +19,7 @@ function QuestionOverlay() {
       overlay={renderTooltip}
     >
       <img
+        className="question-img"
         src={Question}
         style={{
           width: "30px",

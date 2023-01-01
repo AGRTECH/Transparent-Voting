@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import "./App.css";
-import leftArrow from "../img/leftarrow.png";
-import rightArrow from "../img/rightarrow.png";
+import leftArrow from "../img/larrow.png";
+import rightArrow from "../img/rarrow.png";
 import {
   votingSelector,
   web3Selector,
@@ -76,7 +76,7 @@ const Results = (props) => {
         resultsArr.push(parseInt(poll.id));
       }
       return (
-        <tr key={poll.id} className="results-heads">
+        <tr key={poll.id} className="">
           <td className="results-sections">{poll.id}</td>
           <td className="results-sections">
             {poll.poll[0].toUpperCase() + formattedCat}
@@ -119,73 +119,102 @@ const Results = (props) => {
     const { allPolls, allPollsLoaded } = props;
 
     return (
-      <tbody>
-        <tr className="results-heads">
-          <th>Poll #</th>
-          <th>Poll Category</th>
-          <th>Canidate One</th>
-          <th>Canidate Two</th>
-          <th>Final Votes (Canidate One)</th>
-          <th>Final Votes (Canidate Two)</th>
-          <th>Winner</th>
-        </tr>
-        {allPollsLoaded && allPolls.data.length > 0 ? (
-          allPolls.data.map((poll) => renderResult(poll, props))
-        ) : (
-          <tr>
-            <td>No results to show...</td>
+      <th className="active-poll-title">
+        Results
+        <tbody>
+          <tr className="results-heads">
+            <th className="results-titles">Poll #</th>
+            <th className="results-titles">Poll Category</th>
+            <th className="results-titles">Canidate One</th>
+            <th className="results-titles">Canidate Two</th>
+            <th className="results-titles">Final Votes (Canidate One)</th>
+            <th className="results-titles">Final Votes (Canidate Two)</th>
+            <th className="results-titles">Winner</th>
           </tr>
-        )}
-      </tbody>
+          {allPollsLoaded && allPolls.data.length > 0 ? (
+            allPolls.data.map((poll) => renderResult(poll, props))
+          ) : (
+            <tr>
+              <td>No results to show...</td>
+            </tr>
+          )}
+        </tbody>
+      </th>
     );
   };
 
   return (
-    <table className="results-container">
-      {props.pollCreated ? (
-        showAllResults(props)
-      ) : (
-        <tbody>
-          <tr>
-            <td>"No results right now..."</td>
-          </tr>
-        </tbody>
-      )}
-      <img
-        src={leftArrow}
-        style={{ width: "20px", height: "15px" }}
-        alt=""
-        onClick={() => {
-          if (firstPoll - 1 == 0) {
-            return;
-          } else {
-            setFirstPoll((poll) => {
-              return poll - 7;
-            });
-            setLastPoll((poll) => {
-              return poll - 7;
-            });
-          }
+    <div>
+      <table className="results-container">
+        {props.pollCreated ? (
+          showAllResults(props)
+        ) : (
+          <tbody>
+            <tr>
+              <td>"No results right now..."</td>
+            </tr>
+          </tbody>
+        )}
+      </table>
+      <div
+        style={{
+          backgroundColor: "rgba(62, 62, 62, 1)",
+          borderRadius: "12px",
+          width: "10%",
+          marginLeft: "470px",
+          marginBottom: "100px",
+          padding: "5px 0px",
+          boxShadow: "0px 3px 5px 0px rgba(0, 0, 0, 0.75)",
         }}
-      />
-      <img
-        src={rightArrow}
-        style={{ width: "20px", height: "15px" }}
-        alt=""
-        onClick={() => {
-          if (!fullResultsArr.includes(resultsArr[0] + 7)) {
-            return;
-          } else {
-            setFirstPoll((poll) => {
-              return poll + 7;
-            });
-            setLastPoll((poll) => {
-              return poll + 7;
-            });
-          }
-        }}
-      />
-    </table>
+      >
+        <img
+          className="arrow"
+          src={leftArrow}
+          style={{
+            width: "12px",
+            height: "17px",
+            marginLeft: "32px",
+            marginBottom: "4px",
+          }}
+          alt=""
+          onClick={() => {
+            if (firstPoll - 1 == 0) {
+              return;
+            } else {
+              setFirstPoll((poll) => {
+                return poll - 7;
+              });
+              setLastPoll((poll) => {
+                return poll - 7;
+              });
+            }
+          }}
+        />
+        <img
+          className="arrow"
+          src={rightArrow}
+          style={{
+            width: "12px",
+            height: "17px",
+            marginLeft: "15px",
+            marginBottom: "4px",
+          }}
+          alt=""
+          onClick={() => {
+            if (!fullResultsArr.includes(resultsArr[0] + 7)) {
+              return;
+            } else {
+              setFirstPoll((poll) => {
+                return poll + 7;
+              });
+              setLastPoll((poll) => {
+                return poll + 7;
+              });
+            }
+          }}
+        />
+      </div>
+    </div>
   );
 };
 

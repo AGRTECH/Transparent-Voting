@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import "./App.css";
-import leftArrow from "../img/leftarrow.png";
-import rightArrow from "../img/rightarrow.png";
+import leftArrow from "../img/larrow.png";
+import rightArrow from "../img/rarrow.png";
 import {
   votingSelector,
   web3Selector,
@@ -175,41 +175,61 @@ const ActivePolls = (props) => {
     // }
 
     return (
-      <tbody className="">
-        <tr>
-          <th className="active-polls-sections">#</th>
-          <th className="active-polls-sections">Category</th>
-          <th className="active-polls-sections">Canidate One</th>
-          <th className="active-polls-sections">Canidate Two</th>
-          <th className="active-polls-sections">Time</th>
-          <th className="active-polls-sections-last">Submitted By</th>
-        </tr>
-        {allPollsLoaded && allPolls.data.length > 0 ? (
-          allPolls.data.map((poll) => RenderPoll(poll, props, timestampArr))
-        ) : (
+      <th className="active-poll-title">
+        Active polls
+        <tbody className="table-body-container">
           <tr>
-            <td>No polls to show...</td>
+            <th className="active-polls-sections">#</th>
+            <th className="active-polls-sections">Category</th>
+            <th className="active-polls-sections">Canidate One</th>
+            <th className="active-polls-sections">Canidate Two</th>
+            <th className="active-polls-sections">Time</th>
+            <th className="active-polls-sections-last">Submitted By</th>
           </tr>
-        )}
-      </tbody>
+          {allPollsLoaded && allPolls.data.length > 0 ? (
+            allPolls.data.map((poll) => RenderPoll(poll, props, timestampArr))
+          ) : (
+            <tr>
+              <td>No polls to show...</td>
+            </tr>
+          )}
+        </tbody>
+      </th>
     );
   };
 
   return (
-    <table className="active-polls-container">
-      {props.pollCreated ? (
-        showAllPolls(props)
-      ) : (
-        <tbody>
-          <tr>
-            <td>"No active polls right now..."</td>
-          </tr>
-        </tbody>
-      )}
-      <td style={{ backgroundColor: "rgba(32, 32, 32, 0.88)" }}>
+    <div className="table-arrow-container">
+      <table className="active-polls-container">
+        {props.pollCreated ? (
+          showAllPolls(props)
+        ) : (
+          <tbody>
+            <tr>
+              <td>"No active polls right now..."</td>
+            </tr>
+          </tbody>
+        )}
+      </table>
+      <div
+        style={{
+          backgroundColor: "rgba(62, 62, 62, 1)",
+          borderRadius: "12px",
+          width: "20%",
+          marginLeft: "190px",
+          padding: "5px 0px",
+          boxShadow: "0px 3px 5px 0px rgba(0, 0, 0, 0.75)",
+        }}
+      >
         <img
+          className="arrow"
           src={leftArrow}
-          style={{ width: "20px", height: "15px" }}
+          style={{
+            width: "12px",
+            height: "17px",
+            marginLeft: "28px",
+            marginBottom: "4px",
+          }}
           alt=""
           onClick={() => {
             if (!fullActiveArr.includes(activeArr[activeArr.length - 1] - 3)) {
@@ -226,10 +246,13 @@ const ActivePolls = (props) => {
           }}
         />
         <img
+          className="arrow"
           src={rightArrow}
           style={{
-            width: "20px",
-            height: "15px",
+            width: "12px",
+            height: "17px",
+            marginLeft: "15px",
+            marginBottom: "4px",
           }}
           alt=""
           onClick={() => {
@@ -245,8 +268,8 @@ const ActivePolls = (props) => {
             }
           }}
         />
-      </td>
-    </table>
+      </div>
+    </div>
   );
 };
 

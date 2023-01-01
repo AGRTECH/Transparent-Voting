@@ -60,7 +60,7 @@ const Navbar = (props) => {
         {props.accountLoaded ? (
           <a className=" nav-account">
             {props.votingLoaded
-              ? `Account: ${props.account
+              ? `${props.account
                   .split("")
                   .splice(0, 2, "")
                   .join("")}...${props.account

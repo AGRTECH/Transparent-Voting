@@ -189,8 +189,13 @@ const ActivePolls = (props) => {
           {allPollsLoaded && allPolls.data.length > 0 ? (
             allPolls.data.map((poll) => RenderPoll(poll, props, timestampArr))
           ) : (
-            <tr>
-              <td></td>
+            <tr className="active-poll-title">
+              <th className="active-polls-sections">#</th>
+              <th className="active-polls-sections">Category</th>
+              <th className="active-polls-sections">Canidate One</th>
+              <th className="active-polls-sections">Canidate Two</th>
+              <th className="active-polls-sections">Time</th>
+              <th className="active-polls-sections-last">Submitted By</th>
             </tr>
           )}
         </tbody>
@@ -204,11 +209,19 @@ const ActivePolls = (props) => {
         {props.pollCreated ? (
           showAllPolls(props)
         ) : (
-          <tbody>
-            <tr>
-              <td></td>
-            </tr>
-          </tbody>
+          <th className="active-poll-title">
+            Active polls
+            <tbody className="table-body-container">
+              <tr>
+                <th className="active-polls-sections">#</th>
+                <th className="active-polls-sections">Category</th>
+                <th className="active-polls-sections">Canidate One</th>
+                <th className="active-polls-sections">Canidate Two</th>
+                <th className="active-polls-sections">Time</th>
+                <th className="active-polls-sections-last">Submitted By</th>
+              </tr>
+            </tbody>
+          </th>
         )}
       </table>
       <div

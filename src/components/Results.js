@@ -149,11 +149,20 @@ const Results = (props) => {
         {props.pollCreated ? (
           showAllResults(props)
         ) : (
-          <tbody>
-            <tr>
-              <td></td>
-            </tr>
-          </tbody>
+          <th className="active-poll-title">
+            Results
+            <tbody>
+              <tr className="results-heads">
+                <th className="results-titles">Poll #</th>
+                <th className="results-titles">Poll Category</th>
+                <th className="results-titles">Canidate One</th>
+                <th className="results-titles">Canidate Two</th>
+                <th className="results-titles">Final Votes (Canidate One)</th>
+                <th className="results-titles">Final Votes (Canidate Two)</th>
+                <th className="results-titles">Winner</th>
+              </tr>
+            </tbody>
+          </th>
         )}
       </table>
       <div

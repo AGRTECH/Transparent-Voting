@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import wallet from "../img/biggerwallet1.png";
 import leftArrow from "../img/larrow.png";
 import "./App.css";
+import ArrowOverlay from "./ArrowOverlay";
 import {
   accountSelector,
   accountLoadedSelector,
@@ -60,7 +61,7 @@ const Navbar = (props) => {
           {window.ethereum.networkVersion === "5" && props.votingLoaded ? (
             <>
               <a className="nav-account">Goerli </a>
-              <a className="down-arrow">
+              {/* <a className="down-arrow">
                 <img
                   src={leftArrow}
                   style={{
@@ -71,7 +72,8 @@ const Navbar = (props) => {
                   }}
                   alt=""
                 />
-              </a>
+              </a> */}
+              <ArrowOverlay />
             </>
           ) : (
             "Please switch to Goerli"

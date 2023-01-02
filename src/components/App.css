@@ -423,12 +423,28 @@ body {
 }
 
 @media (max-width: 570px) {
+  .all-container {
+    justify-content: stretch;
+    align-items: stretch;
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+
   .real-time-polls-sections {
     font-size: 10px;
   }
 
   .real-time-polls-sections-last {
+    display: none;
+  }
+
+  .real-time-polls-sections-countdown {
     font-size: 10px;
+    padding-right: 10px;
+  }
+
+  .active-polls-sections-last {
+    display: none;
   }
 
   .active-polls-sections {

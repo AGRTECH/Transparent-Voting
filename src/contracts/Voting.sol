@@ -3,6 +3,7 @@ pragma solidity ^0.5.0;
 
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 import "openzeppelin-solidity/contracts/utils/ReentrancyGuard.sol";
+import "./Tvote.sol";
 
 // To Do List
    // [x] Users can create a new poll with 2 choices 
@@ -18,6 +19,7 @@ contract Voting is ReentrancyGuard {
    // Variables and Mappings
    uint256 public pollCount;
    uint256 public voteId;
+   address public owner;
    Tvote public tvote;
    mapping(uint256 => _Poll) public polls;
    mapping(uint256 => mapping(string => uint)) public votesPerChoicePerPoll;
@@ -33,10 +35,22 @@ contract Voting is ReentrancyGuard {
    // Events and Structs
    event PollEvent(
       uint256 id,
+      uint pollsCreated,
       address user,
       string poll,
       string choice1,
       string choice2,
+      uint256 timestamp
+   );
+
+    event VoteEvent(
+      uint256 voteId,
+      uint votesCasted,
+      uint256 pollId,
+      address user,
+      string poll,
+      string choice,
+      uint voteCount,
       uint256 timestamp
    );
 
@@ -49,15 +63,7 @@ contract Voting is ReentrancyGuard {
     uint256 timestamp;
   }
 
-   event VoteEvent(
-      uint256 voteId,
-      uint256 pollId,
-      address user,
-      string poll,
-      string choice,
-      uint voteCount,
-      uint256 timestamp
-   );
+  
    
 
     /** 
@@ -79,7 +85,7 @@ contract Voting is ReentrancyGuard {
       polls[pollCount] = _Poll(pollCount, msg.sender, _poll, _choice1, _choice2, now);
 
       // Emit PollEvent
-      emit PollEvent(pollCount, msg.sender, _poll, _choice1, _choice2, now); 
+      emit PollEvent(pollCount, totalPollsCreated[msg.sender], msg.sender, _poll, _choice1, _choice2, now); 
    }
 
      /** 
@@ -107,7 +113,7 @@ contract Voting is ReentrancyGuard {
       votesPerChoicePerPoll[_id][_choice] = votesPerChoicePerPoll[_id][_choice].add(1);
 
       // Emit VoteEvent
-      emit VoteEvent(voteId, _id, msg.sender, _poll, _choice, votesPerChoicePerPoll[_id][_choice], now);
+      emit VoteEvent(voteId, totalVotes[msg.sender], _id, msg.sender, _poll, _choice, votesPerChoicePerPoll[_id][_choice], now);
    }
 
    function claimWinnings(uint _winnings) public nonReentrant {

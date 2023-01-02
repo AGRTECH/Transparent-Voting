@@ -205,36 +205,28 @@ const ActivePolls = (props) => {
 
   return (
     <div className="table-arrow-container">
-      <table className="active-polls-container">
-        {props.pollCreated ? (
-          showAllPolls(props)
-        ) : (
-          <th className="active-poll-title">
-            Active polls
-            <tbody className="table-body-container">
-              <tr>
-                <th className="active-polls-sections">#</th>
-                <th className="active-polls-sections">Category</th>
-                <th className="active-polls-sections">Canidate One</th>
-                <th className="active-polls-sections">Canidate Two</th>
-                <th className="active-polls-sections">Time</th>
-                <th className="active-polls-sections-last">Submitted By</th>
-              </tr>
-            </tbody>
-          </th>
-        )}
-      </table>
-      <div
-        style={{
-          backgroundColor: "rgba(62, 62, 62, 1)",
-          borderRadius: "12px",
-          width: "20%",
-          marginLeft: "190px",
-          marginTop: "-20px",
-          padding: "5px 0px",
-          boxShadow: "0px 3px 5px 0px rgba(0, 0, 0, 0.75)",
-        }}
-      >
+      <div className="active-polls-div">
+        <table className="active-polls-container">
+          {props.pollCreated ? (
+            showAllPolls(props)
+          ) : (
+            <th className="active-poll-title">
+              Active polls
+              <tbody className="table-body-container">
+                <tr>
+                  <th className="active-polls-sections">#</th>
+                  <th className="active-polls-sections">Category</th>
+                  <th className="active-polls-sections">Canidate One</th>
+                  <th className="active-polls-sections">Canidate Two</th>
+                  <th className="active-polls-sections">Time</th>
+                  <th className="active-polls-sections-last">Submitted By</th>
+                </tr>
+              </tbody>
+            </th>
+          )}
+        </table>
+      </div>
+      <div className="active-arrow-div">
         <img
           className="arrow"
           src={leftArrow}

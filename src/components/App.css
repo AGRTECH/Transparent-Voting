@@ -52,10 +52,16 @@ body {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   height: 450px;
   width: 500px;
+  line-height: 10px;
   border-collapse: separate !important;
 }
 
+/* .active-polls-div {
+  height: 200px;
+} */
+
 .table-body-container {
+  height: 200px;
 }
 
 .results-container {
@@ -73,6 +79,10 @@ body {
 
 .table-arrow-container {
   border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .results-sections {
@@ -105,7 +115,7 @@ body {
   font-weight: bold;
   background-color: rgba(32, 32, 32, 0.88);
   padding-left: 10px;
-  height: 25%;
+  /* height: 25%; */
   width: 100px;
 }
 
@@ -115,7 +125,7 @@ body {
   background-color: rgba(32, 32, 32, 0.88);
   padding-left: 10px;
   padding-right: 40px;
-  height: 25%;
+  /* height: 20px; */
   width: 150px;
 }
 
@@ -124,7 +134,7 @@ body {
   font-weight: bold;
   /* border: 1px solid rgb(47, 47, 47); */
   padding-left: 10px;
-  height: 25%;
+  /* height: 25%; */
   padding-right: 10px;
   background-color: rgba(32, 32, 32, 0.88);
 }
@@ -143,16 +153,17 @@ body {
   border-radius: 22px;
   background-color: rgba(32, 32, 32, 0.78);
   width: 100%;
-  height: 50px;
+  height: 20px;
   padding-left: 10px;
   padding-right: 10px;
-  padding-top: 5px;
+  padding-top: 15px;
   padding-bottom: 30px;
 }
 
 .active-polls-sections {
   color: rgb(194, 194, 194);
   font-size: 15px;
+  text-align: center;
   background-color: rgba(32, 32, 32, 0.78);
   width: 100px;
   height: 50px;
@@ -163,6 +174,7 @@ body {
   color: rgb(194, 194, 194);
   background-color: rgba(32, 32, 32, 0.78);
   font-size: 15px;
+  text-align: center;
   padding-left: 10px;
   padding-right: 10px;
 }
@@ -318,6 +330,25 @@ body {
   opacity: 0.3;
 }
 
+.results-arrow-div {
+  background-color: rgba(62, 62, 62, 1);
+  border-radius: 12px;
+  width: 100px;
+  /* margin-left: 470px; */
+  margin-bottom: 100px;
+  margin-top: -20px;
+  padding: 5px 0px;
+  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.75);
+}
+.active-arrow-div {
+  background-color: rgba(62, 62, 62, 1);
+  border-radius: 12px;
+  width: 100px;
+  margin-top: -20px;
+  padding: 5px 0px;
+  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
 @media (max-width: 1080px) {
   .logo-img {
     margin-left: 5px;
@@ -325,5 +356,94 @@ body {
 
   .nav-account {
     margin-right: 5px;
+  }
+}
+
+@media (max-width: 1110px) {
+  .results-container {
+    width: 870px;
+  }
+
+  .results-arrow-div {
+    /* margin-left: 380px; */
+  }
+}
+
+@media (max-width: 920px) {
+  .create-active-container {
+    flex-direction: column;
+  }
+
+  .create-poll-form {
+    width: 100%;
+    /* margin: 0; */
+    /* margin: 0 200px 0 50px; */
+    /* margin-left: 50px; */
+    margin-right: 0;
+  }
+
+  .bar {
+    width: 100%;
+  }
+
+  .active-polls-container {
+    /* margin-left: 50px; */
+    margin-top: 40px;
+    width: 100%;
+  }
+  .active-poll-title {
+    margin-right: 50px;
+  }
+
+  .real-time-polls-sections {
+    width: 150px;
+  }
+
+  .all-container {
+    justify-content: stretch;
+    align-items: stretch;
+    margin-right: 50px;
+    margin-left: 50px;
+  }
+
+  .create-active-container {
+    justify-content: stretch;
+    /* margin-right: 100px; */
+  }
+
+  .results-container {
+    width: 100%;
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+}
+
+@media (max-width: 570px) {
+  .real-time-polls-sections {
+    font-size: 10px;
+  }
+
+  .real-time-polls-sections-last {
+    font-size: 10px;
+  }
+
+  .active-polls-sections {
+    font-size: 10px;
+  }
+
+  .active-polls-sections-last {
+    font-size: 10px;
+  }
+
+  .active.active-polls-container {
+    font-size: 10px;
+  }
+
+  .results-titles {
+    font-size: 10px;
+  }
+
+  .results-sections {
+    font-size: 10px;
   }
 }

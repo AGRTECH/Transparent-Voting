@@ -123,12 +123,12 @@ const Results = (props) => {
         Results
         <tbody>
           <tr className="results-heads">
-            <th className="results-titles">Poll #</th>
-            <th className="results-titles">Poll Category</th>
+            <th className="results-titles">#</th>
+            <th className="results-titles">Category</th>
             <th className="results-titles">Canidate One</th>
             <th className="results-titles">Canidate Two</th>
-            <th className="results-titles">Final Votes (Canidate One)</th>
-            <th className="results-titles">Final Votes (Canidate Two)</th>
+            <th className="results-titles">Votes</th>
+            <th className="results-titles">Votes</th>
             <th className="results-titles">Winner</th>
           </tr>
           {allPollsLoaded && allPolls.data.length > 0 ? (
@@ -144,7 +144,7 @@ const Results = (props) => {
   };
 
   return (
-    <div>
+    <div className="table-arrow-container">
       <table className="results-container">
         {props.pollCreated ? (
           showAllResults(props)
@@ -153,30 +153,19 @@ const Results = (props) => {
             Results
             <tbody>
               <tr className="results-heads">
-                <th className="results-titles">Poll #</th>
-                <th className="results-titles">Poll Category</th>
+                <th className="results-titles">#</th>
+                <th className="results-titles">Category</th>
                 <th className="results-titles">Canidate One</th>
                 <th className="results-titles">Canidate Two</th>
-                <th className="results-titles">Final Votes (Canidate One)</th>
-                <th className="results-titles">Final Votes (Canidate Two)</th>
+                <th className="results-titles">Votes</th>
+                <th className="results-titles">Votes</th>
                 <th className="results-titles">Winner</th>
               </tr>
             </tbody>
           </th>
         )}
       </table>
-      <div
-        style={{
-          backgroundColor: "rgba(62, 62, 62, 1)",
-          borderRadius: "12px",
-          width: "10%",
-          marginLeft: "470px",
-          marginBottom: "100px",
-          marginTop: "-20px",
-          padding: "5px 0px",
-          boxShadow: "0px 3px 5px 0px rgba(0, 0, 0, 0.75)",
-        }}
-      >
+      <div className="results-arrow-div">
         <img
           className="arrow"
           src={leftArrow}

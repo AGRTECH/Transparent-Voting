@@ -294,6 +294,11 @@ body {
   color: blue;
 }
 
+.modal-title {
+  text-align: center;
+  background-color: rgb(241, 241, 241);
+}
+
 .bar {
   padding: 1px 150px;
   background-color: rgba(0, 0, 0, 0.2);

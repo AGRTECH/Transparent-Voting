@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import { connect } from "react-redux";
 import "./App.css";
 import Navbar from "./Navbar";
@@ -8,26 +8,30 @@ import { loadAccount, loadWeb3 } from "../store/interactions";
 import ParticlesBg from "particles-bg";
 import bg from "../img/blackbgfinall.png";
 
-class App extends Component {
-  UNSAFE_componentWillMount() {
-    this.loadBlockchainData(this.props.dispatch);
-  }
+const App = (props) => {
+  const [mounted, setMounted] = useState(false);
 
-  async loadBlockchainData(dispatch) {
+  const loadBlockchainData = async (dispatch) => {
     const web3 = loadWeb3(dispatch);
     await web3.eth.net.getNetworkType();
     await loadAccount(web3, dispatch);
+  };
+
+  if (!mounted) {
+    loadBlockchainData(props.dispatch);
   }
 
-  render() {
-    return (
-      <>
-        <Navbar />
-        <PollTabs />
-      </>
-    );
-  }
-}
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  return (
+    <>
+      <Navbar />
+      <PollTabs />
+    </>
+  );
+};
 function mapStateToProps(state) {
   return {};
 }

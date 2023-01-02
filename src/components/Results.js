@@ -135,7 +135,7 @@ const Results = (props) => {
             allPolls.data.map((poll) => renderResult(poll, props))
           ) : (
             <tr>
-              <td>No results to show...</td>
+              <td></td>
             </tr>
           )}
         </tbody>
@@ -146,14 +146,15 @@ const Results = (props) => {
   return (
     <div>
       <table className="results-container">
-        {/* {props.pollCreated ? ( */}
-        {showAllResults(props)}
-        {/* <tbody>
+        {props.pollCreated ? (
+          showAllResults(props)
+        ) : (
+          <tbody>
             <tr>
-              <td>"No results right now..."</td>
+              <td></td>
             </tr>
           </tbody>
-        )} */}
+        )}
       </table>
       <div
         style={{
@@ -201,7 +202,7 @@ const Results = (props) => {
           }}
           alt=""
           onClick={() => {
-            if (!fullResultsArr.includes(resultsArr[0] + 7)) {
+            if (!fullResultsArr.includes(resultsArr[0] + 10)) {
               return;
             } else {
               setFirstPoll((poll) => {

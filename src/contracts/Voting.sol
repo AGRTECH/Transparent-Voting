@@ -3,7 +3,6 @@ pragma solidity ^0.5.0;
 
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 import "openzeppelin-solidity/contracts/utils/ReentrancyGuard.sol";
-import "./Tvote.sol";
 
 // To Do List
    // [x] Users can create a new poll with 2 choices 
@@ -19,23 +18,20 @@ contract Voting is ReentrancyGuard {
    // Variables and Mappings
    uint256 public pollCount;
    uint256 public voteId;
-   address public owner;
-   Tvote public tvote;
+   // address public owner;
    mapping(uint256 => _Poll) public polls;
    mapping(uint256 => mapping(string => uint)) public votesPerChoicePerPoll;
    mapping(uint256 => mapping(address => bool)) public hasVotedOnPoll;
    mapping(address => uint) public totalVotes;
    mapping(address => uint) public totalPollsCreated;
    
-   constructor(Tvote _tvote) public {
-    tvote = _tvote;
-    owner = msg.sender;
-  }
+//    constructor() public {
+//     owner = msg.sender;
+//   }
 
    // Events and Structs
    event PollEvent(
       uint256 id,
-      uint pollsCreated,
       address user,
       string poll,
       string choice1,
@@ -45,7 +41,6 @@ contract Voting is ReentrancyGuard {
 
     event VoteEvent(
       uint256 voteId,
-      uint votesCasted,
       uint256 pollId,
       address user,
       string poll,
@@ -78,14 +73,12 @@ contract Voting is ReentrancyGuard {
       // pollCount is used as a unique ID for each poll and when this function is called it creates a new ID
       pollCount = pollCount.add(1);
 
-      // Increases Total Polls created Count 
-      totalPollsCreated[msg.sender] = totalPollsCreated[msg.sender].add(1);
 
       // Adds the unique poll to the polls mapping
       polls[pollCount] = _Poll(pollCount, msg.sender, _poll, _choice1, _choice2, now);
 
       // Emit PollEvent
-      emit PollEvent(pollCount, totalPollsCreated[msg.sender], msg.sender, _poll, _choice1, _choice2, now); 
+      emit PollEvent(pollCount, msg.sender, _poll, _choice1, _choice2, now); 
    }
 
      /** 
@@ -106,21 +99,19 @@ contract Voting is ReentrancyGuard {
       // Voter has now voted on the poll and cannot vote on it again
       hasVotedOnPoll[_id][msg.sender] = true;
 
-      // Increases Total Vote Count 
-      totalVotes[msg.sender] = totalVotes[msg.sender].add(1);
 
       // Counts votes for each choice of a specific poll
       votesPerChoicePerPoll[_id][_choice] = votesPerChoicePerPoll[_id][_choice].add(1);
 
       // Emit VoteEvent
-      emit VoteEvent(voteId, totalVotes[msg.sender], _id, msg.sender, _poll, _choice, votesPerChoicePerPoll[_id][_choice], now);
+      emit VoteEvent(voteId, _id, msg.sender, _poll, _choice, votesPerChoicePerPoll[_id][_choice], now);
    }
 
-   function claimWinnings(uint _winnings) public nonReentrant {
+   // function claimWinnings(uint _winnings) public nonReentrant {
 
 
-      tvote.transfer(msg.sender, _winnings);
-   }
+   //    tvote.transfer(msg.sender, _winnings);
+   // }
 
    // function removeResult(uint256 _id) onlyOwner {
 

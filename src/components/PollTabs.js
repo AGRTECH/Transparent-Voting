@@ -1,9 +1,10 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import { Tabs, Tab } from "react-bootstrap";
 import CreatePoll from "./CreatePoll";
 import ActivePolls from "./ActivePolls";
 import Results from "./Results";
 import "./App.css";
+import { Modal, Button } from "react-bootstrap";
 import {
   subscribeToEvents,
   loadAllData,
@@ -13,13 +14,14 @@ import {
 import { votingSelector, votingLoadedSelector } from "../store/selectors";
 import { connect } from "react-redux";
 
-class PollTabs extends Component {
-  UNSAFE_componentWillMount() {
-    this.loadBlockchainData(this.props);
-  }
+const PollTabs = (props) => {
+  const [mounted, setMounted] = useState(false);
+  const [show, setShow] = useState(false);
 
-  async loadBlockchainData(props) {
-    const { dispatch } = props;
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const loadBlockchainData = async (dispatch) => {
     const web3 = loadWeb3(dispatch);
     await web3.eth.net.getNetworkType();
     const networkId = await web3.eth.net.getId();
@@ -28,22 +30,44 @@ class PollTabs extends Component {
       // window.alert(
       //   "Token smart contract not detcted on the current network. Please select another network with Metamask"
       // );
+      setShow(true);
     } else {
       await loadAllData(voting, dispatch);
       await subscribeToEvents(voting, dispatch);
     }
+  };
+
+  if (!mounted) {
+    loadBlockchainData(props.dispatch);
   }
 
-  render() {
-    return (
-      <>
-        <CreatePoll />
-        {/* <ActivePolls /> */}
-        {/* <Results /> */}
-      </>
-    );
-  }
-}
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  return (
+    <>
+      <CreatePoll />
+      {/* <ActivePolls /> */}
+      {/* <Results /> */}
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton className="modal-title">
+          <Modal.Title className="modal-title">
+            Wrong network detected
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Please switch to the goerli network on your metamask wallet
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
+};
 function mapStateToProps(state) {
   return {
     voting: votingSelector(state),

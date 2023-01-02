@@ -190,7 +190,7 @@ const ActivePolls = (props) => {
             allPolls.data.map((poll) => RenderPoll(poll, props, timestampArr))
           ) : (
             <tr>
-              <td>No polls to show...</td>
+              <td></td>
             </tr>
           )}
         </tbody>
@@ -201,15 +201,15 @@ const ActivePolls = (props) => {
   return (
     <div className="table-arrow-container">
       <table className="active-polls-container">
-        {/* {props.pollCreated ? ( */}
-        {showAllPolls(props)}
-        {/* ) : (
+        {props.pollCreated ? (
+          showAllPolls(props)
+        ) : (
           <tbody>
             <tr>
-              <td>"No active polls right now..."</td>
+              <td></td>
             </tr>
           </tbody>
-        )} */}
+        )}
       </table>
       <div
         style={{

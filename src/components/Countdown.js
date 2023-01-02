@@ -43,7 +43,7 @@ const Countdown = (props) => {
   const textSecond = Math.floor((seconds % minute) / second);
 
   return (
-    <td className="real-time-polls-sections">
+    <td className="real-time-polls-sections-countdown">
       {!isNaN(textDay)
         ? `D: ${textDay} H: ${textHour} M: ${textMinute} S: ${textSecond}`
         : "No time remaining..."}

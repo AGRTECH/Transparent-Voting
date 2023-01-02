@@ -103,7 +103,7 @@ const Results = (props) => {
   };
 
   const [firstPoll, setFirstPoll] = useState(1);
-  const [lastPoll, setLastPoll] = useState(7);
+  const [lastPoll, setLastPoll] = useState(10);
 
   // Table pagination
   // useEffect(() => {
@@ -163,6 +163,7 @@ const Results = (props) => {
           width: "10%",
           marginLeft: "470px",
           marginBottom: "100px",
+          marginTop: "-20px",
           padding: "5px 0px",
           boxShadow: "0px 3px 5px 0px rgba(0, 0, 0, 0.75)",
         }}
@@ -182,10 +183,10 @@ const Results = (props) => {
               return;
             } else {
               setFirstPoll((poll) => {
-                return poll - 7;
+                return poll - 10;
               });
               setLastPoll((poll) => {
-                return poll - 7;
+                return poll - 10;
               });
             }
           }}
@@ -205,10 +206,10 @@ const Results = (props) => {
               return;
             } else {
               setFirstPoll((poll) => {
-                return poll + 7;
+                return poll + 10;
               });
               setLastPoll((poll) => {
-                return poll + 7;
+                return poll + 10;
               });
             }
           }}

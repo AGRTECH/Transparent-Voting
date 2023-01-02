@@ -78,6 +78,10 @@ body {
 .results-sections {
   /* border: 1px solid rgb(47, 47, 47); */
   background-color: rgba(32, 32, 32, 0.88);
+  color: rgb(194, 194, 194);
+  font-weight: normal;
+  font-size: 13px;
+  font-weight: bold;
   padding-left: 10px;
   width: 100px;
 }
@@ -99,12 +103,20 @@ body {
 .real-time-polls-sections {
   font-size: 13px;
   font-weight: bold;
-  /* border: 1px solid rgb(47, 47, 47); */
   background-color: rgba(32, 32, 32, 0.88);
-  /* border-bottom: 1px solid rgb(47, 47, 47); */
   padding-left: 10px;
   height: 25%;
   width: 100px;
+}
+
+.real-time-polls-sections-countdown {
+  font-size: 13px;
+  font-weight: bold;
+  background-color: rgba(32, 32, 32, 0.88);
+  padding-left: 10px;
+  padding-right: 40px;
+  height: 25%;
+  width: 150px;
 }
 
 .real-time-polls-sections-last {
@@ -241,7 +253,7 @@ body {
 }
 
 .logo-img {
-  width: 100px;
+  width: 150px;
   height: 100px;
   margin-left: 40px;
 }

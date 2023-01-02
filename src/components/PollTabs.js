@@ -25,9 +25,9 @@ class PollTabs extends Component {
     const networkId = await web3.eth.net.getId();
     const voting = await loadVoting(web3, networkId, dispatch);
     if (!voting) {
-      window.alert(
-        "Token smart contract not detcted on the current network. Please select another network with Metamask"
-      );
+      // window.alert(
+      //   "Token smart contract not detcted on the current network. Please select another network with Metamask"
+      // );
     } else {
       await loadAllData(voting, dispatch);
       await subscribeToEvents(voting, dispatch);

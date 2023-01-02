@@ -146,15 +146,14 @@ const Results = (props) => {
   return (
     <div>
       <table className="results-container">
-        {props.pollCreated ? (
-          showAllResults(props)
-        ) : (
-          <tbody>
+        {/* {props.pollCreated ? ( */}
+        {showAllResults(props)}
+        {/* <tbody>
             <tr>
               <td>"No results right now..."</td>
             </tr>
           </tbody>
-        )}
+        )} */}
       </table>
       <div
         style={{

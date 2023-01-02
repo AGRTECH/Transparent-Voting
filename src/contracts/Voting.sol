@@ -22,6 +22,8 @@ contract Voting is ReentrancyGuard {
    mapping(uint256 => _Poll) public polls;
    mapping(uint256 => mapping(string => uint)) public votesPerChoicePerPoll;
    mapping(uint256 => mapping(address => bool)) public hasVotedOnPoll;
+   mapping(address => uint) public totalVotes;
+   mapping(address => uint) public totalPollsCreated;
    
    constructor(Tvote _tvote) public {
     tvote = _tvote;
@@ -70,6 +72,9 @@ contract Voting is ReentrancyGuard {
       // pollCount is used as a unique ID for each poll and when this function is called it creates a new ID
       pollCount = pollCount.add(1);
 
+      // Increases Total Polls created Count 
+      totalPollsCreated[msg.sender] = totalPollsCreated[msg.sender].add(1);
+
       // Adds the unique poll to the polls mapping
       polls[pollCount] = _Poll(pollCount, msg.sender, _poll, _choice1, _choice2, now);
 
@@ -94,6 +99,9 @@ contract Voting is ReentrancyGuard {
 
       // Voter has now voted on the poll and cannot vote on it again
       hasVotedOnPoll[_id][msg.sender] = true;
+
+      // Increases Total Vote Count 
+      totalVotes[msg.sender] = totalVotes[msg.sender].add(1);
 
       // Counts votes for each choice of a specific poll
       votesPerChoicePerPoll[_id][_choice] = votesPerChoicePerPoll[_id][_choice].add(1);

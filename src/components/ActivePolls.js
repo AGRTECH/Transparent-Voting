@@ -201,15 +201,15 @@ const ActivePolls = (props) => {
   return (
     <div className="table-arrow-container">
       <table className="active-polls-container">
-        {props.pollCreated ? (
-          showAllPolls(props)
-        ) : (
+        {/* {props.pollCreated ? ( */}
+        {showAllPolls(props)}
+        {/* ) : (
           <tbody>
             <tr>
               <td>"No active polls right now..."</td>
             </tr>
           </tbody>
-        )}
+        )} */}
       </table>
       <div
         style={{

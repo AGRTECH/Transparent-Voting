@@ -1,6 +1,7 @@
 import React, { Component, useState, useEffect } from "react";
 import { connect } from "react-redux";
 import wallet from "../img/biggerwallet1.png";
+import leftArrow from "../img/larrow.png";
 import "./App.css";
 import {
   accountSelector,
@@ -55,10 +56,26 @@ const Navbar = (props) => {
           }}
           alt=""
         />
-        <a className="nav-account">
-          {window.ethereum.networkVersion === "5" && props.votingLoaded
-            ? "Goerli"
-            : "Please switch to Goerli"}
+        <a className="no-underline">
+          {window.ethereum.networkVersion === "5" && props.votingLoaded ? (
+            <>
+              <a className="nav-account">Goerli </a>
+              <a className="down-arrow">
+                <img
+                  src={leftArrow}
+                  style={{
+                    width: "8px",
+                    height: "15px",
+                    rotate: "270deg",
+                    marginLeft: "5px",
+                  }}
+                  alt=""
+                />
+              </a>
+            </>
+          ) : (
+            "Please switch to Goerli"
+          )}
           {console.log(typeof window.ethereum.networkVersion)}
         </a>
         <img
@@ -77,19 +94,33 @@ const Navbar = (props) => {
           alt=""
         />
         {props.accountLoaded ? (
-          <a className=" nav-account">
-            {props.votingLoaded
-              ? `${props.account
-                  .split("")
-                  .splice(0, 2, "")
-                  .join("")}...${props.account
-                  .split("")
-                  .splice(38, 4, "")
-                  .join("")}`
-              : window.ethereum.networkVersion !== "5" && account.length > 1
-              ? "---"
-              : "Connect Wallet"}
-          </a>
+          <>
+            <a className=" nav-account">
+              {props.votingLoaded
+                ? `${props.account
+                    .split("")
+                    .splice(0, 2, "")
+                    .join("")}...${props.account
+                    .split("")
+                    .splice(38, 4, "")
+                    .join("")}`
+                : window.ethereum.networkVersion !== "5" && account.length > 1
+                ? "---"
+                : "Connect Wallet"}
+            </a>
+            <a className="down-arrow-last">
+              <img
+                src={leftArrow}
+                style={{
+                  width: "8px",
+                  height: "15px",
+                  rotate: "270deg",
+                  marginLeft: "5px",
+                }}
+                alt=""
+              />
+            </a>
+          </>
         ) : (
           <p>Please Connect Your Wallet</p>
         )}

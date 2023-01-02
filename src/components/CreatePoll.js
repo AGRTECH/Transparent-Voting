@@ -44,10 +44,12 @@ const ShowForm = (props) => {
               );
             }}
           >
-            <p className="create-poll-title">Create Poll</p>
-            <p className="create-poll-title-desc">
-              web3.0 voter corruption solution
-            </p>
+            <div className="create-poll-titles-div">
+              <p className="create-poll-title">Create Poll</p>
+              <p className="create-poll-title-desc">
+                web3.0 voter corruption solution
+              </p>
+            </div>
             <QuestionOverlay />
             <div className="bar"></div>
             <input

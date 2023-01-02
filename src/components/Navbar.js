@@ -77,7 +77,7 @@ const Navbar = (props) => {
               <NetworkOverlay />
             </>
           ) : (
-            "Please switch to Goerli"
+            <a className="nav-account">Switch to Goerli</a>
           )}
           {console.log(typeof window.ethereum.networkVersion)}
         </a>

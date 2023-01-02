@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import wallet from "../img/biggerwallet1.png";
 import leftArrow from "../img/larrow.png";
 import "./App.css";
-import ArrowOverlay from "./ArrowOverlay";
+import NetworkOverlay from "./NetworkOverlay";
+import AccountOverlay from "./AccountOverlay";
 import {
   accountSelector,
   accountLoadedSelector,
@@ -73,7 +74,7 @@ const Navbar = (props) => {
                   alt=""
                 />
               </a> */}
-              <ArrowOverlay />
+              <NetworkOverlay />
             </>
           ) : (
             "Please switch to Goerli"
@@ -110,7 +111,7 @@ const Navbar = (props) => {
                 ? "---"
                 : "Connect Wallet"}
             </a>
-            <a className="down-arrow-last">
+            {/* <a className="down-arrow-last">
               <img
                 src={leftArrow}
                 style={{
@@ -121,7 +122,8 @@ const Navbar = (props) => {
                 }}
                 alt=""
               />
-            </a>
+            </a>  */}
+            <AccountOverlay account={props.account} />
           </>
         ) : (
           <p>Please Connect Your Wallet</p>

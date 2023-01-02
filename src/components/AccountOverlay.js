@@ -4,8 +4,16 @@ import Tooltip from "react-bootstrap/Tooltip";
 import leftArrow from "../img/larrow.png";
 import "./App.css";
 
-function ArrowOverlay() {
-  const renderTooltip = (props) => <Tooltip {...props}>Goerli</Tooltip>;
+function AccountOverlay(props) {
+  const renderTooltip = (propss) => (
+    <Tooltip {...propss}>{`${props.account
+      .split("")
+      .splice(0, 2, "")
+      .join("")}...${props.account
+      .split("")
+      .splice(38, 4, "")
+      .join("")}`}</Tooltip>
+  );
 
   return (
     <OverlayTrigger
@@ -13,7 +21,7 @@ function ArrowOverlay() {
       delay={{ show: 150, hide: 50 }}
       overlay={renderTooltip}
     >
-      <a className="down-arrow">
+      <a className="down-arrow-last">
         <img
           src={leftArrow}
           style={{
@@ -29,4 +37,4 @@ function ArrowOverlay() {
   );
 }
 
-export default ArrowOverlay;
+export default AccountOverlay;

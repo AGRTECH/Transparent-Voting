@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import ActivePolls from "./ActivePolls";
 import Results from "./Results";
 import QuestionOverlay from "./QuestionOverlay";
+import statsIcons from "../img/statsicon.png";
+import { Modal, Button } from "react-bootstrap";
 import "./App.css";
 import {
   categoryChanged,
@@ -17,26 +19,31 @@ import {
   canidateOneSelector,
   canidateTwoSelector,
   accountSelector,
+  totalVotesSelector,
 } from "../store/selectors";
 
 const ShowForm = (props) => {
-  const { dispatch, voting, category, canidateOne, canidateTwo, account } =
-    props;
+  const {
+    dispatch,
+    voting,
+    category,
+    canidateOne,
+    canidateTwo,
+    account,
+    totalVotes,
+  } = props;
 
   const [pollClicked, setPollClicked] = useState(true);
   const [voteClicked, setVoteClicked] = useState(false);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
     <>
       <div className="all-container">
         <div className="create-active-container">
-          <button
-            onClick={() => {
-              readVotes(dispatch, voting, account);
-            }}
-          >
-            Read Votes
-          </button>
           <form
             className="create-poll-form"
             onSubmit={(e) => {
@@ -51,13 +58,32 @@ const ShowForm = (props) => {
               );
             }}
           >
-            <div className="create-poll-titles-div">
-              <p className="create-poll-title">Create Poll</p>
-              <p className="create-poll-title-desc">
-                web3.0 voter corruption solution
-              </p>
+            <div className="create-poll-top-div">
+              <div className="create-poll-titles-div">
+                <p className="create-poll-title">Create Poll</p>
+                <p className="create-poll-title-desc">
+                  web3.0 voter corruption solution
+                </p>
+              </div>
+              <div className="create-poll-icons-div">
+                <img
+                  className="stats-img"
+                  src={statsIcons}
+                  style={{
+                    width: "23px",
+                    height: "20px",
+                    marginBottom: "15px",
+                    marginRight: "10px",
+                  }}
+                  onClick={() => {
+                    readVotes(dispatch, voting, account);
+                    setShow(true);
+                  }}
+                  alt=""
+                />
+                <QuestionOverlay />
+              </div>
             </div>
-            <QuestionOverlay />
             <div className="bar"></div>
             <input
               type="text"
@@ -94,12 +120,27 @@ const ShowForm = (props) => {
         </div>
         <Results />
       </div>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton className="modal-title">
+          <Modal.Title className="modal-title">Stats</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Lifetime Total Votes: {totalVotes}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };
 
 const CreatePoll = (props) => {
-  return <div>{ShowForm(props)}</div>;
+  return (
+    <>
+      <div>{ShowForm(props)}</div>
+    </>
+  );
 };
 function mapStateToProps(state) {
   return {
@@ -109,6 +150,7 @@ function mapStateToProps(state) {
     canidateOne: canidateOneSelector(state),
     canidateTwo: canidateTwoSelector(state),
     account: accountSelector(state),
+    totalVotes: totalVotesSelector(state),
   };
 }
 

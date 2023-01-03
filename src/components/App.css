@@ -356,7 +356,22 @@ body {
 .create-poll-titles-div {
   display: flex;
   flex-direction: column;
-  margin-left: -60px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.create-poll-icons-div {
+  display: flex;
+  margin-left: 200px;
+}
+
+.stats-img {
+  margin-left: "-200px";
+}
+
+.stats-img:hover {
+  cursor: pointer;
+  opacity: 0.3;
 }
 
 @media (max-width: 1080px) {
@@ -384,11 +399,22 @@ body {
     flex-direction: column;
   }
 
+  .create-poll-top-div {
+    display: flex;
+  }
+
+  .create-poll-icons-div {
+    display: flex;
+    margin-left: 50px;
+  }
+
+  .stats-img {
+    margin-left: 0px;
+  }
+
   .create-poll-titles-div {
-    margin-left: -30px;
-    justify-content: start;
-    align-items: start;
-    align-self: center;
+    margin-left: 0px;
+    margin-right: 50px;
   }
 
   .create-poll-title {
@@ -454,6 +480,15 @@ body {
     margin-left: 20px;
   }
 
+  .create-poll-icons-div {
+    display: flex;
+    margin-left: 00px;
+  }
+
+  .stats-img {
+    margin-left: 0px;
+  }
+
   .create-poll-title {
     /* color: rgb(60, 60, 60); */
     color: rgb(95, 95, 95);
@@ -476,7 +511,7 @@ body {
   .create-poll-titles-div {
     display: flex;
     flex-direction: column;
-    margin-left: -110px;
+    margin-left: 5px;
   }
 
   .real-time-polls-sections {

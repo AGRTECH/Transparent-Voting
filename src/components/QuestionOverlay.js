@@ -1,7 +1,7 @@
 import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import Question from "../img/transparentquestionmark.png";
+import Question from "../img/darkerqmark.png";
 import "./App.css";
 
 function QuestionOverlay() {
@@ -22,10 +22,10 @@ function QuestionOverlay() {
         className="question-img"
         src={Question}
         style={{
-          width: "30px",
-          height: "25px",
+          width: "27px",
+          height: "23px",
           marginBottom: "20px",
-          marginLeft: "220px",
+          position: "relative",
         }}
         alt=""
       />

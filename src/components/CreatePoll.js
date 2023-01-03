@@ -25,6 +25,7 @@ import {
   accountSelector,
   totalVotesSelector,
   totalPollsCreatedSelector,
+  votingLoadedSelector,
 } from "../store/selectors";
 
 const ShowForm = (props) => {
@@ -132,7 +133,36 @@ const ShowForm = (props) => {
           <Modal.Title className="modal-title">Stats</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Lifetime Total Votes: {totalVotes} Polls Created {totalPollsCreated}
+          <p
+            style={{
+              textAlign: "center",
+              fontSize: "25px",
+              fontWeight: "bold",
+            }}
+          >
+            {props.votingLoaded
+              ? `${account.split("").splice(0, 2, "").join("")}...${account
+                  .split("")
+                  .splice(38, 4, "")
+                  .join("")}`
+              : ""}
+          </p>
+          <div className="bar"></div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              margin: "0px 75px",
+            }}
+          >
+            <p>
+              Total Votes: <span style={{ color: "green" }}>{totalVotes}</span>{" "}
+            </p>
+            <p>
+              Polls Created:{" "}
+              <span style={{ color: "green" }}>{totalPollsCreated}</span>{" "}
+            </p>
+          </div>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
@@ -154,6 +184,7 @@ const CreatePoll = (props) => {
 function mapStateToProps(state) {
   return {
     voting: votingSelector(state),
+    votingLoaded: votingLoadedSelector(state),
     web3: web3Selector(state),
     category: categorySelector(state),
     canidateOne: canidateOneSelector(state),

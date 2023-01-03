@@ -19,6 +19,13 @@ export const votingLoadedSelector = createSelector(votingLoaded, (e) => e);
 const totalVotes = (state) => get(state, "voting.totalVotes", false);
 export const totalVotesSelector = createSelector(totalVotes, (e) => e);
 
+const totalPollsCreated = (state) =>
+  get(state, "voting.totalPollsCreated", false);
+export const totalPollsCreatedSelector = createSelector(
+  totalPollsCreated,
+  (e) => e
+);
+
 const category = (state) => get(state, "createPoll.category");
 export const categorySelector = createSelector(category, (e) => e);
 

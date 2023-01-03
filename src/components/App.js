@@ -2,7 +2,7 @@ import React, { Component, useState, useEffect } from "react";
 import { connect } from "react-redux";
 import "./App.css";
 import Navbar from "./Navbar";
-import PollTabs from "./PollTabs";
+import Main from "./Main";
 import CreatePoll from "./CreatePoll";
 import { loadAccount, loadWeb3 } from "../store/interactions";
 import ParticlesBg from "particles-bg";
@@ -28,7 +28,7 @@ const App = (props) => {
   return (
     <>
       <Navbar />
-      <PollTabs />
+      <Main />
     </>
   );
 };

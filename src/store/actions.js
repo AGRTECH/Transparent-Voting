@@ -98,3 +98,10 @@ export function readingVotes(votes) {
     votes,
   };
 }
+
+export function readingPollsCreated(polls) {
+  return {
+    type: "READING_POLLS_CREATED",
+    polls,
+  };
+}

@@ -10,6 +10,7 @@ import {
   voteCasting,
   allVotesLoaded,
   readingVotes,
+  readingPollsCreated,
 } from "./actions";
 import Web3 from "web3";
 
@@ -113,10 +114,14 @@ export const readVotes = (dispatch, voting, account) => {
     .then((res) => {
       dispatch(readingVotes(res));
     });
-  // .on("transactionHash", (hash) => {
-  //   dispatch(readingVotes());
-  // })
-  // .on("error", (error) => {
-  //   console.error(error);
-  // });
+};
+
+export const readPollsCreated = (dispatch, voting, account) => {
+  let polls;
+  polls = voting.methods
+    .totalPollsCreated(account)
+    .call()
+    .then((res) => {
+      dispatch(readingPollsCreated(res));
+    });
 };

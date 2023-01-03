@@ -11,7 +11,11 @@ import {
   canidateOneChanged,
   canidateTwoChanged,
 } from "../store/actions";
-import { createPollFunc, readVotes } from "../store/interactions";
+import {
+  createPollFunc,
+  readVotes,
+  readPollsCreated,
+} from "../store/interactions";
 import {
   votingSelector,
   web3Selector,
@@ -20,6 +24,7 @@ import {
   canidateTwoSelector,
   accountSelector,
   totalVotesSelector,
+  totalPollsCreatedSelector,
 } from "../store/selectors";
 
 const ShowForm = (props) => {
@@ -31,6 +36,7 @@ const ShowForm = (props) => {
     canidateTwo,
     account,
     totalVotes,
+    totalPollsCreated,
   } = props;
 
   const [pollClicked, setPollClicked] = useState(true);
@@ -77,6 +83,7 @@ const ShowForm = (props) => {
                   }}
                   onClick={() => {
                     readVotes(dispatch, voting, account);
+                    readPollsCreated(dispatch, voting, account);
                     setShow(true);
                   }}
                   alt=""
@@ -124,7 +131,9 @@ const ShowForm = (props) => {
         <Modal.Header closeButton className="modal-title">
           <Modal.Title className="modal-title">Stats</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Lifetime Total Votes: {totalVotes}</Modal.Body>
+        <Modal.Body>
+          Lifetime Total Votes: {totalVotes} Polls Created {totalPollsCreated}
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
@@ -151,6 +160,7 @@ function mapStateToProps(state) {
     canidateTwo: canidateTwoSelector(state),
     account: accountSelector(state),
     totalVotes: totalVotesSelector(state),
+    totalPollsCreated: totalPollsCreatedSelector(state),
   };
 }
 

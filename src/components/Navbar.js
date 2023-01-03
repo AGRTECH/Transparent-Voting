@@ -62,18 +62,7 @@ const Navbar = (props) => {
           {window.ethereum.networkVersion === "5" && props.votingLoaded ? (
             <>
               <a className="nav-account">Goerli </a>
-              {/* <a className="down-arrow">
-                <img
-                  src={leftArrow}
-                  style={{
-                    width: "8px",
-                    height: "15px",
-                    rotate: "270deg",
-                    marginLeft: "5px",
-                  }}
-                  alt=""
-                />
-              </a> */}
+
               <NetworkOverlay />
             </>
           ) : (
@@ -111,18 +100,7 @@ const Navbar = (props) => {
                 ? "---"
                 : "Connect Wallet"}
             </a>
-            {/* <a className="down-arrow-last">
-              <img
-                src={leftArrow}
-                style={{
-                  width: "8px",
-                  height: "15px",
-                  rotate: "270deg",
-                  marginLeft: "5px",
-                }}
-                alt=""
-              />
-            </a>  */}
+
             <AccountOverlay account={props.account} />
           </>
         ) : (

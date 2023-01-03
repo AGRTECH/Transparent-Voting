@@ -14,7 +14,7 @@ import {
 import { votingSelector, votingLoadedSelector } from "../store/selectors";
 import { connect } from "react-redux";
 
-const PollTabs = (props) => {
+const Main = (props) => {
   const [mounted, setMounted] = useState(false);
   const [show, setShow] = useState(false);
 
@@ -27,9 +27,6 @@ const PollTabs = (props) => {
     const networkId = await web3.eth.net.getId();
     const voting = await loadVoting(web3, networkId, dispatch);
     if (!voting) {
-      // window.alert(
-      //   "Token smart contract not detcted on the current network. Please select another network with Metamask"
-      // );
       setShow(true);
     } else {
       await loadAllData(voting, dispatch);
@@ -48,8 +45,6 @@ const PollTabs = (props) => {
   return (
     <>
       <CreatePoll />
-      {/* <ActivePolls /> */}
-      {/* <Results /> */}
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton className="modal-title">
           <Modal.Title className="modal-title">
@@ -75,4 +70,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(PollTabs);
+export default connect(mapStateToProps)(Main);

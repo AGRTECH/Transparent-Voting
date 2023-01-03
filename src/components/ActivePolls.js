@@ -21,31 +21,9 @@ import { counter } from "../store/actions";
 import { Pagination } from "react-bootstrap";
 
 const ActivePolls = (props) => {
-  function TablePagnation() {
-    return (
-      <Pagination>
-        <Pagination.First />
-        <Pagination.Prev />
-        <Pagination.Item>{1}</Pagination.Item>
-        <Pagination.Ellipsis />
-
-        <Pagination.Item>{10}</Pagination.Item>
-        <Pagination.Item>{11}</Pagination.Item>
-        <Pagination.Item active>{12}</Pagination.Item>
-        <Pagination.Item>{13}</Pagination.Item>
-        <Pagination.Item disabled>{14}</Pagination.Item>
-
-        <Pagination.Ellipsis />
-        <Pagination.Item>{20}</Pagination.Item>
-        <Pagination.Next />
-        <Pagination.Last />
-      </Pagination>
-    );
-  }
   let now = new Date();
   let currentTime = now.getTime() / 1000;
-  // poll.id > firstPoll &&
-  // poll.id < lastPoll
+
   let activeArr = [];
   let fullActiveArr = [];
 
@@ -169,10 +147,6 @@ const ActivePolls = (props) => {
     for (let i = 0; i < allPolls.data.length; i++) {
       timestampArr.push(allPolls.data[i].timestamp - gap);
     }
-
-    // if (allPollsLoaded) {
-    //   setLastPoll(15);
-    // }
 
     return (
       <th className="active-poll-title">

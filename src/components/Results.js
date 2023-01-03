@@ -105,16 +105,6 @@ const Results = (props) => {
   const [firstPoll, setFirstPoll] = useState(1);
   const [lastPoll, setLastPoll] = useState(10);
 
-  // Table pagination
-  // useEffect(() => {
-  //   setFirstPoll(
-  //     props.allPollsLoaded
-  //       ? props.allPolls.data.length - (props.allPolls.data.length + 1)
-  //       : 0
-  //   );
-  //   setLastPoll(props.allPollsLoaded ? firstPoll + 8 : 0);
-  // }, [props.allPollsLoaded]);
-
   const showAllResults = (props) => {
     const { allPolls, allPollsLoaded } = props;
 

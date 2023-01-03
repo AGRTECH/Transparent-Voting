@@ -73,6 +73,8 @@ contract Voting is ReentrancyGuard {
       // pollCount is used as a unique ID for each poll and when this function is called it creates a new ID
       pollCount = pollCount.add(1);
 
+      totalPollsCreated[msg.sender] = totalPollsCreated[msg.sender].add(1);
+
 
       // Adds the unique poll to the polls mapping
       polls[pollCount] = _Poll(pollCount, msg.sender, _poll, _choice1, _choice2, now);
@@ -98,6 +100,8 @@ contract Voting is ReentrancyGuard {
 
       // Voter has now voted on the poll and cannot vote on it again
       hasVotedOnPoll[_id][msg.sender] = true;
+
+      totalVotes[msg.sender] = totalVotes[msg.sender].add(1);
 
 
       // Counts votes for each choice of a specific poll

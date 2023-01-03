@@ -17,6 +17,8 @@ function voting(state = {}, action) {
       return { ...state, loaded: true, contract: action.contract };
     case "VOTING_CASTED":
       return { ...state, contract: action.contract };
+    case "READING_VOTES":
+      return { ...state, totalVotes: action.votes };
     default:
       return state;
   }

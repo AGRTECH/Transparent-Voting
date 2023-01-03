@@ -91,3 +91,10 @@ export function saveLastCount(seconds) {
     seconds,
   };
 }
+
+export function readingVotes(votes) {
+  return {
+    type: "READING_VOTES",
+    votes,
+  };
+}

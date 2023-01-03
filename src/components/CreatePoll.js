@@ -9,7 +9,7 @@ import {
   canidateOneChanged,
   canidateTwoChanged,
 } from "../store/actions";
-import { createPollFunc } from "../store/interactions";
+import { createPollFunc, readVotes } from "../store/interactions";
 import {
   votingSelector,
   web3Selector,
@@ -30,6 +30,13 @@ const ShowForm = (props) => {
     <>
       <div className="all-container">
         <div className="create-active-container">
+          <button
+            onClick={() => {
+              readVotes(dispatch, voting, account);
+            }}
+          >
+            Read Votes
+          </button>
           <form
             className="create-poll-form"
             onSubmit={(e) => {

@@ -156,11 +156,16 @@ const ShowForm = (props) => {
             }}
           >
             <p>
-              Total Votes: <span style={{ color: "green" }}>{totalVotes}</span>{" "}
+              Total Votes:{" "}
+              <span style={{ color: "green", fontWeight: "bold" }}>
+                {totalVotes}
+              </span>{" "}
             </p>
             <p>
               Polls Created:{" "}
-              <span style={{ color: "green" }}>{totalPollsCreated}</span>{" "}
+              <span style={{ color: "green", fontWeight: "bold" }}>
+                {totalPollsCreated}
+              </span>{" "}
             </p>
           </div>
         </Modal.Body>
